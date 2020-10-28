@@ -1,0 +1,92 @@
+body>.container {
+    padding: 60px 15px 0;
+}
+
+.page-section {
+    margin-top: 50px;
+}
+
+.centrar {
+    text-align: center;
+}
+
+.centrar h1 {
+    margin-bottom: 50px;
+}
+
+.dashboard-link {
+    padding: 10px;
+    text-align: center;
+}
+
+.dashboard-link div {
+    font-size: 80px;
+}
+
+.dashboard-link .container {
+    padding: 20px;
+}
+
+.dashboard-link .container:hover {
+    background: #111c5d;
+    color: #ffffff;
+}
+
+.dashboard-link .container h5 {
+    margin-top: 20px;
+    font-family: sans-serif;
+    font-size: 20px;
+}
+
+.section .centrar {
+    text-align: center;
+}
+
+form .row .centrar button {
+    background: #111c5d;
+    color: white;
+}
+
+form .row .centrar button:hover {
+    background: #1533dd;
+    color: white;
+}
+
+.section .centrar .user-list {
+    overflow: auto;
+    height: 400px;
+}
+
+.section .centrar .right {
+    text-align: right;
+}
+
+.section .centrar #right a {
+    margin: 15px;
+}
+
+.admin-item {
+    margin: 5px;
+    width: 100%;
+}
+
+.section .container h3 {
+    padding-bottom: 20px;
+    color: #111c5d;
+    font-style: oblique;
+    font-size: 30px;
+}
+
+.section .container form .form-group label {
+    color: black;
+    margin-bottom: 20px;
+}
+
+#nombre {
+    border: 1px solid black;
+}
+
+.btn-reg {
+    margin: 10px;
+    color: white;
+}

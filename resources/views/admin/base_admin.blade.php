@@ -13,31 +13,34 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
-
+    <link rel="stylesheet" href="{{asset('css/style_admin.css')}}">
 </head>
 <body>
     <header>
         <nav class="navbar bd-navbar navbar-expand-lg navbar-light shadow">
-            <a href="" class="navbar-brand">
+            <a href="{{url('/admin')}}" class="navbar-brand">
                 <img src="{{asset('files/tnm.png')}}" alt="TNM logo">
             </a>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Usuarios</a>
+                        <a class="nav-link" href="{{url('/admin/usuarios')}}">Usuarios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Roles</a>
+                        <a class="nav-link" href="{{url('/admin/rol')}}">Roles</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Departamentos</a>
+                        <a class="nav-link" href="{{url('/admin/departamentos')}}">Departamentos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Carreras</a>
+                        <a class="nav-link" href="{{url('/admin/carreras')}}">Carreras</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Empresas</a>
+                        <a class="nav-link" href="{{url('/admin/empresas')}}">Empresas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url('/admin/solicitudes')}}">Solicitudes</a>
                     </li>
                 </ul>
 

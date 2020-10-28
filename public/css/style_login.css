@@ -1,0 +1,41 @@
+#index-body {
+    background: #111c5d;
+}
+
+.index-container {
+    display: inline;
+}
+
+.login-container {
+    padding: 20px;
+    margin-top: 50px;
+}
+
+#login-title {
+    text-align: center;
+    border-radius: 10px;
+}
+
+.login-container #login-title p span {
+    color: white;
+    font-style: bold;
+}
+
+.login-container #login-title .logo img {
+    width: 200px;
+    height: 100px;
+}
+
+#login-title p {
+    font-size: 80px;
+}
+
+#btn-login {
+    text-align: right;
+    display: flex;
+    justify-content: center;
+}
+
+#btn-login button {
+    margin-top: 20px;
+}

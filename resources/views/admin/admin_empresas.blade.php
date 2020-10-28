@@ -1,6 +1,6 @@
 @extends('admin/base_admin')
 
-@section('title','Administración de roles')
+@section('title','Administación de Departamentos')
 
 @section('content')
     <div class="section page-section">
@@ -9,7 +9,7 @@
                 <table class="table">
                     <thead class="bg-dark text-white">
                         <tr>
-                            <th scope="col">Rol</th>
+                            <th scope="col">Empresa</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
@@ -17,19 +17,19 @@
                         <tr>
                             <th scope="row"></th>
                             <td>
-                                <a href="{{url('admin/rol/editar')}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar">
+                                <a href="" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <a href="" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Borrar">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
                             </td>
-                        </tr> 
+                        </tr>
                     </tbody>
                 </table>
             </div>
             <div class="right">
-                <a href="#" class="btn btn-success">Nuevo Rol <i class="fas fa-plus"></i></a>
+                <a href="#" class="btn btn-success">Nueva Empresa <i class="fas fa-plus"></i></a>
             </div>
         </div>
     </div>

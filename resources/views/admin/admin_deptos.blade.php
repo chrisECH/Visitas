@@ -17,7 +17,7 @@
                         <tr>
                             <th scope="row"></th>
                             <td>
-                                <a href="" class="btn-primary" data-toggle="tooltip" data-placement="top" title="Editar">
+                                <a href="{{url('admin/departamentos/editar')}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <a href="" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Borrar">
@@ -27,6 +27,9 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+            <div class="right">
+                <a href="#" class="btn btn-success">Nuevo Departamento <i class="fas fa-plus"></i></a>
             </div>
         </div>
     </div>

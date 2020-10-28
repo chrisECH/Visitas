@@ -19,7 +19,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::get('/', function () {
-    return view('login');
+    return view('/auth/login');
 });
 
 Route::get('/base', function () {
@@ -27,6 +27,11 @@ Route::get('/base', function () {
 });
 
 Route::get('/admin',[AdminController::class, 'index'])->name('admin');
+Route::get('/admin/usuarios',[AdminController::class,'usuarios']);
+Route::get('/admin/rol',[AdminController::class, 'rol']); 
 Route::get('/admin/departamentos',[AdminController::class, 'departamentos']);
-    
-
+Route::get('/admin/carreras',[AdminController::class, 'carreras']);
+Route::get('/admin/empresas',[AdminController::class, 'empresas']); 
+Route::get('/admin/solicitudes',[AdminController::class, 'solicitudes']); 
+Route::get('/admin/departamentos/editar',[AdminController::class, 'edit_depto']);
+Route::get('/admin/rol/editar',[AdminController::class, 'edit_rol']);
