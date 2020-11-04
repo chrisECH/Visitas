@@ -1,6 +1,6 @@
-@extends('admin/base_admin')
+@extends('admin/admin_demo')
 
-@section('title','Panel de administrador.')
+@section('title','| Panel de administrador.')
 
 @section('content')
     <div class="section page-section">

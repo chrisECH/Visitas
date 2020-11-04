@@ -1,6 +1,6 @@
-@extends('admin/base_admin')
+@extends('admin/admin_demo')
 
-@section('title','Administación de Departamentos')
+@section('title','| Administación de Departamentos')
 
 @section('content')
     <div class="section page-section">

@@ -1,0 +1,49 @@
+:root {
+    --primario: #111c5d;
+    --light: #ffffff;
+    --gray: #efefef;
+    --logo: rgb(175, 174, 174)
+}
+
+body {
+    overflow: hidden;
+    font-family: 'Muli', sans-serif;
+    font-weight: 300;
+    color: var(--primario);
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.bg-primary {
+    background-color: var(--primario) !important;
+}
+
+#sidebar-container {
+    min-height: 100vh;
+}
+
+#sidebar-container .logo {
+    background: var(--logo);
+    height: 55px;
+}
+
+#sidebar-container .logo a img {
+    height: 45px;
+    width: 200px;
+}
+
+#sidebar-container .menu {
+    width: 18rem;
+}
+
+.avatar {
+    max-width: 35px;
+}
+
+@media(max-width: 768px) {
+    #sidebar-container {
+        display: none;
+    }
+}

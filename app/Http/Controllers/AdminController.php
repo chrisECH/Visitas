@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     public function index(){
-        return view('admin/panel_admin');
+        return view('admin/admin_inicio');
     }
 
     public function usuarios(){
@@ -40,5 +40,9 @@ class AdminController extends Controller
 
     public function edit_rol(){
         return view('admin/edicion_rol');
+    }
+
+    public function edit_users(){
+        return view('admin/edicion_user');
     }
 }

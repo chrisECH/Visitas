@@ -1,6 +1,6 @@
-@extends('admin/base_admin')
+@extends('admin/admin_demo')
 
-@section('title','Editar Rol')
+@section('title','| Editar Rol')
 
 @section('content')
     <div class="section page-section">

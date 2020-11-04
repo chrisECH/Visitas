@@ -82,11 +82,16 @@ form .row .centrar button:hover {
     margin-bottom: 20px;
 }
 
-#nombre {
-    border: 1px solid black;
+.section .container .form-group input,
+.section .container .form-group .form-control {
+    border: 1px black solid;
 }
 
 .btn-reg {
     margin: 10px;
     color: white;
+}
+
+.card {
+    margin-top: 5%;
 }
