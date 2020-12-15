@@ -26,7 +26,7 @@ a:hover {
 
 #sidebar-container .logo {
     background: var(--logo);
-    height: 55px;
+    height: 60px;
 }
 
 #sidebar-container .logo a img {
@@ -39,7 +39,7 @@ a:hover {
 }
 
 .avatar {
-    max-width: 35px;
+    max-width: 29px;
 }
 
 @media(max-width: 768px) {

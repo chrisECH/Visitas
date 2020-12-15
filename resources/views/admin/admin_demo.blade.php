@@ -10,6 +10,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://kit.fontawesome.com/56dc3e6550.js" crossorigin="anonymous"></script>
+    
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
@@ -22,12 +23,12 @@
     <div class="d-flex">
         <div id="sidebar-container" class="bg-primary">
             <div class="logo d-flex justify-content-center align-content-center">
-                <a href="{{url('/')}}" class="navbar-brand justify-content-center">
+                <a href="{{route('admin.index')}}" class="navbar-brand justify-content-center">
                     <img src="{{asset('files/tnm.png')}}" alt="TNM logo">
                 </a>
             </div>
             <div class="menu">
-                <a href="{{url('/')}}" class="d-block text-light p-3"><i class="icon ion-md-home mr-2 lead"></i>Inicio</a>
+                <a href="{{route('admin.index')}}" class="d-block text-light p-3"><i class="icon ion-md-home mr-2 lead"></i>Inicio</a>
                 <a href="" class="d-block text-light p-3"><i class="icon ion-md-stats mr-2 lead"></i>Estadisticas</a>
                 <a href="{{url('/admin/usuarios')}}" class="d-block text-light p-3"><i class="icon ion-md-people mr-2 lead"></i>Administrar Usuarios</a>
                 <a href="{{url('/admin/rol')}}" class="d-block text-light p-3"><i class="icon ion-md-person mr-2 lead"></i>Administrar Roles</a>
@@ -51,17 +52,18 @@
                     <ul class="navbar-nav ml-auto">
                         
                         <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                         <img src="" class="img-fluid rounded-circle mr-2 avatar" alt="">  
-                         Christian
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Perfil</a>
-                            <a class="dropdown-item" href="#">Configuracion</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Cerrar sesión</a>
-                        </div>
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            
+                            <img src="{{asset('files/no-photo.png')}}" class="img-fluid rounded-circle mr-2 avatar" alt="">  
+                            Christian Eduardo
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Perfil</a>
+                                <a class="dropdown-item" href="#">Configuracion</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Cerrar sesión</a>
+                            </div>
                         </li>
                     </ul>
                     

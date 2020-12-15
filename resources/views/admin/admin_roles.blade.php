@@ -14,22 +14,24 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($roles as $rol)
                         <tr>
-                            <th scope="row"></th>
+                            <th scope="row">{{$rol->nombre}}</th>
                             <td>
-                                <a href="{{url('admin/rol/editar')}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar">
+                                <a href="{{url('admin/rol/editar',$rol->id)}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Borrar">
+                                <a href="{{url('admini/rol/eliminar',$rol->id)}}" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Borrar">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
                             </td>
                         </tr> 
+                        @endforeach
                     </tbody>
                 </table>
             </div>
             <div class="right">
-                <a href="#" class="btn btn-success">Nuevo Rol <i class="fas fa-plus"></i></a>
+                <a href="{{url ('admin/rol/registrar')}}" class="btn btn-success">Nuevo Rol <i class="fas fa-plus"></i></a>
             </div>
         </div>
     </div>

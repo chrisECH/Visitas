@@ -55,7 +55,7 @@
                 </table>
             </div>
             <div class="right" id="right">
-                <a href="#" class="btn btn-success">
+                <a href="{{url ('admin/usuarios/registrar')}}" class="btn btn-success">
                     Nuevo usuario
                     <i class="fas fa-plus"></i>
                 </a>
