@@ -5,11 +5,28 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Rol;
 
+use function Ramsey\Uuid\v1;
+
 class AdminController extends Controller
 {
-    
+    public function index(){
+        return view('login');
+    }
     public function indexAdmin(){
         return view('admin.admin_inicio');
+    }
+
+
+    public function indexProfesor(){
+        return view('profesores.prof_index');
+    }
+
+    public function indexSubdirector(){
+        return view('subdirector.sub_index');
+    }
+
+    public function indexJefeDepto(){
+        return view('jefeDepto.jefe_index');
     }
 
     public function usuarios(){
@@ -23,10 +40,6 @@ class AdminController extends Controller
     public function regis_users(Request $request){
         $rols = rol::all();
         return view('admin.registrar_user',['rols'=>$rols]);
-    }
-
-    public function rol(){
-        return view('admin.admin_roles');
     }
 
     public function departamentos(){
@@ -49,13 +62,8 @@ class AdminController extends Controller
         return view('admin.edicion_depto');
     }
 
-    public function edit_rol(){
-        return view('admin.edicion_rol');
+    public function adminPerfil(){
+        return view('admin.admin_perfil');
     }
 
-    public function regis_rol(){
-        return view ('admin.registrar_rol');
-    }
-
-   
 }

@@ -13,7 +13,7 @@ class RolController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {   
         $roles = Rol::all();
         return view('admin.admin_roles',['roles'=>$roles]);

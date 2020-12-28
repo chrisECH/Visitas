@@ -21,13 +21,15 @@
         <div class="row align-middle">
             <div class="col-md-4"> </div>
             <div class="col-md-4 col-sm-12 bg-light login-container">
-                <form action="" method="POST">
+                <form action="{{route('admin.index')}}" method="">
                     {{ csrf_field() }}
                     <div id="login-title">
                         <div class="logo text-center">
                             <img src="files/tnm.png" alt="TNM Logo">
                         </div>
                         <p><i class="text-dark"><h3>Bienvenido al <span class="sgi">SGI</span></h3></i></p>
+                        <h5 class=" text-dark">Proceso Vinculacion - Visitas a empresas.</h5>
+                        <br>
                         <h5>Ingrese sus datos de acceso</h5>
                         <br>
                     </div>

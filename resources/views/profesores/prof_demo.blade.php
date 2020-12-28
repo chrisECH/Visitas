@@ -23,20 +23,14 @@
     <div class="d-flex">
         <div id="sidebar-container" class="bg-primary">
             <div class="logo d-flex justify-content-center align-content-center">
-                <a href="{{route('admin.index')}}" class="navbar-brand justify-content-center">
+                <a href="{{route('profe.index')}}" class="navbar-brand justify-content-center">
                     <img src="{{asset('files/tnm.png')}}" alt="TNM logo">
                 </a>
             </div>
             <div class="menu">
-                <a href="{{route('admin.index')}}" class="d-block text-light p-3"><i class="icon ion-md-home mr-2 lead"></i>Inicio</a>
-                <a href="{{route('admin.perfil')}}" class="d-block text-light p-3"><i class="icon ion-md-contact mr-2 lead"></i>Pefil</a>
-                <a href="" class="d-block text-light p-3"><i class="icon ion-md-stats mr-2 lead"></i>Estadisticas</a>
-                <a href="{{route('usuarios.index')}}" class="d-block text-light p-3"><i class="icon ion-md-person-add mr-2 lead"></i>Administrar Usuarios</a>
-                <a href="{{route('rol.index')}}" class="d-block text-light p-3"><i class="icon ion-md-contacts mr-2 lead"></i>Administrar Roles</a>
-                <a href="{{url('/admin/departamentos')}}" class="d-block text-light p-3"><i class="icon ion-md-list mr-2 lead"></i>Administrar Departamentos</a>
-                <a href="{{url('/admin/carreras')}}" class="d-block text-light p-3"><i class="icon ion-md-school mr-2 lead"></i>Administrar Carreras</a>
-                <a href="{{url('/admin/empresas')}}" class="d-block text-light p-3"><i class="icon ion-md-business mr-2 lead"></i>Administrar Empresas</a>
-                <a href="{{url('/admin/solicitudes')}}" class="d-block text-light p-3"><i class="icon ion-md-document mr-2 lead"></i>Administrar Solicitudes</a>
+                <a href="{{route('profe.index')}}" class="d-block text-light p-3"><i class="icon ion-md-home mr-2 lead"></i>Inicio</a>
+                <a href="" class="d-block text-light p-3"><i class="icon ion-md-contact mr-2 lead"></i>Pefil</a>
+                <a href="" class="d-block text-light p-3"><i class="icon ion-md-document mr-2 lead"></i>Crear Solicitud</a>
                 <a href="" class="d-block text-light p-3"><i class="icon ion-md-settings mr-2 lead"></i>Configuración</a>
                 <a href="" class="d-block text-light p-3"><i class="icon ion-md-arrow-back mr-2 lead"></i>Cerrar sesiòn</a>
             </div>

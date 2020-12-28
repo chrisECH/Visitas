@@ -20,7 +20,7 @@
                                 <a href="{{url('admin/departamentos/editar')}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Borrar">
+                                <a href="{{route('admin.regis_depto')}}" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Borrar">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
                             </td>

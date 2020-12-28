@@ -18,12 +18,12 @@
                         <tr>
                             <th scope="row">{{$rol->nombre}}</th>
                             <td>
-                                <a href="{{url('admin/rol/editar',$rol->id)}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar">
+                                <a href="{{route('rol.editar',$rol->id)}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="{{url('admini/rol/eliminar',$rol->id)}}" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Borrar">
+                               {{--  <a href="{{url('admini/rol/eliminar',$rol->id)}}" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Borrar">
                                     <i class="fas fa-trash-alt"></i>
-                                </a>
+                                </a> --}}
                             </td>
                         </tr> 
                         @endforeach
@@ -31,7 +31,7 @@
                 </table>
             </div>
             <div class="right">
-                <a href="{{url ('admin/rol/registrar')}}" class="btn btn-success">Nuevo Rol <i class="fas fa-plus"></i></a>
+                <a href="{{route('rol.crear')}}" class="btn btn-success">Nuevo Rol <i class="fas fa-plus"></i></a>
             </div>
         </div>
     </div>
