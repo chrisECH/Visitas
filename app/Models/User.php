@@ -41,6 +41,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    //relecion uno a muchos Departamento
+    public function departamento(){
+        return $this -> belongsTo('App\Models\Departamento');
+    }
 
+
+    //Relacion uno a muchos rols
+    public function rol(){
+        return $this -> belongsTo('App\Models\Rol');
+    }
   
 }

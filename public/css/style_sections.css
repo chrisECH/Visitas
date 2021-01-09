@@ -95,3 +95,19 @@ form .row .centrar button:hover {
 .card {
     margin-top: 5%;
 }
+
+.modal-body {
+    font-size: 15px;
+}
+
+.modal-content .modal-body span {
+    font-style: inherit;
+    font-weight: bold;
+}
+
+.profile-image {
+    float: center;
+    margin: 10px;
+    width: 60%;
+    border: 1px solid #111c5d;
+}

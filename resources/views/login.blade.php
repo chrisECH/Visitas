@@ -21,8 +21,8 @@
         <div class="row align-middle">
             <div class="col-md-4"> </div>
             <div class="col-md-4 col-sm-12 bg-light login-container">
-                <form action="{{route('admin.index')}}" method="">
-                    {{ csrf_field() }}
+                <form action="{{route('login.post')}}" method="POST">
+                    @csrf
                     <div id="login-title">
                         <div class="logo text-center">
                             <img src="files/tnm.png" alt="TNM Logo">
@@ -37,15 +37,27 @@
                     <div class="dropdown_diver"></div>
                     <div class="from-group">
                         <label for="exampleInputEmail1">Correo electrónico</label>
-                        <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedat="emailHelp">
+                        <input type="email" name="email" class="form-control" id="email" aria-describedat="emailHelp" value="{{old('email')}}">
+                        @error('email')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{$message}}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="from-group">
                         <label for="exampleImputPassword1">Contraseña</label>
-                        <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+                        <input type="password" name="password" class="form-control" id="password">
+                        @error('password')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{$message}}</strong>
+                            </span>
+                        @enderror
+
                     </div>
                     <div id="btn-login">
                         <button type="submit" class="btn btn-primary btn-lg text-right active" role="button" aria-pressed="true">Ingresar</button>
                     </div>
+                    
                 </form>
             </div>
             <div class="col-md-4"></div>

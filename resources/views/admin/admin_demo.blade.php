@@ -31,14 +31,13 @@
                 <a href="{{route('admin.index')}}" class="d-block text-light p-3"><i class="icon ion-md-home mr-2 lead"></i>Inicio</a>
                 <a href="{{route('admin.perfil')}}" class="d-block text-light p-3"><i class="icon ion-md-contact mr-2 lead"></i>Pefil</a>
                 <a href="" class="d-block text-light p-3"><i class="icon ion-md-stats mr-2 lead"></i>Estadisticas</a>
+                <a href="{{url('/admin/solicitudes')}}" class="d-block text-light p-3"><i class="icon ion-md-document mr-2 lead"></i>Administrar Solicitudes</a>
                 <a href="{{route('usuarios.index')}}" class="d-block text-light p-3"><i class="icon ion-md-person-add mr-2 lead"></i>Administrar Usuarios</a>
                 <a href="{{route('rol.index')}}" class="d-block text-light p-3"><i class="icon ion-md-contacts mr-2 lead"></i>Administrar Roles</a>
-                <a href="{{url('/admin/departamentos')}}" class="d-block text-light p-3"><i class="icon ion-md-list mr-2 lead"></i>Administrar Departamentos</a>
-                <a href="{{url('/admin/carreras')}}" class="d-block text-light p-3"><i class="icon ion-md-school mr-2 lead"></i>Administrar Carreras</a>
-                <a href="{{url('/admin/empresas')}}" class="d-block text-light p-3"><i class="icon ion-md-business mr-2 lead"></i>Administrar Empresas</a>
-                <a href="{{url('/admin/solicitudes')}}" class="d-block text-light p-3"><i class="icon ion-md-document mr-2 lead"></i>Administrar Solicitudes</a>
+                <a href="{{route('depto.index')}}" class="d-block text-light p-3"><i class="icon ion-md-list mr-2 lead"></i>Administrar Departamentos</a>
+                <a href="{{route('carrera.index')}}" class="d-block text-light p-3"><i class="icon ion-md-school mr-2 lead"></i>Administrar Carreras</a>
                 <a href="" class="d-block text-light p-3"><i class="icon ion-md-settings mr-2 lead"></i>Configuración</a>
-                <a href="" class="d-block text-light p-3"><i class="icon ion-md-arrow-back mr-2 lead"></i>Cerrar sesiòn</a>
+                <a href="{{route('usuario.logout')}}" class="d-block text-light p-3"><i class="icon ion-md-arrow-back mr-2 lead"></i>Cerrar sesiòn</a>
             </div>
         </div>
 
@@ -55,9 +54,13 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @if(auth()->user()->foto == null)
+                            <img src="{{asset('files/no-photo.png')}}" class="img-fluid rounded-circle mr-2 avatar" alt="">
+                            @else
+                            <img src="{{asset('profile-images/'.auth()->user()->foto)}}" class="img-fluid rounded-circle mr-1 avatar" alt="">
+                            @endif
                             
-                            <img src="{{asset('files/no-photo.png')}}" class="img-fluid rounded-circle mr-2 avatar" alt="">  
-                            Christian Eduardo
+                            {{auth()->user()->nombre}}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="#">Perfil</a>

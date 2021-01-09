@@ -12,7 +12,9 @@
                     </div>
                     <div class="col-md-3">
                         <select name="depto" id="" class="form-control admin-item admin-search">
-                            <option value=""></option>
+                            @foreach ($deptos as $depto)
+                                <option value="{{$depto->id}}">{{$depto->nombre}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="col-md-1"></div>
@@ -29,33 +31,43 @@
                     <thead class="bg-dark text-white">
                         <tr>
                             <th scope="col">Nombre</th>
+                            <th scope="col">Apell. Paterno</th>
+                            <th scope="col">Apell. Materno</th>
                             <th scope="col">Departamento</th>
                             <th scope="col">Rol</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($users as $user)
+                            
+                        
                         <tr>
-                            <th scope="row"></th>
-                            <th scope="row"></th>
-                            <th scope="row"></th>
+                            <th scope="row">{{$user->nombre}}</th>
+                            <th scope="row">{{$user->apellidop}}</th>
+                            <th scope="row">{{$user->apellidom}}</th>
+                            <th scope="row">{{$user->deptoNombre}}</th>
+                            <th scope="row">{{$user->rolNombre}}</th>
                             <td>
                                 <a href="#" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Ver perfil">
                                     <i class="fas fa-eye"></i>
                                 </a>
+                                <a href="{{route('usuarios.editar',$user->id)}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar">
+                                    <i class="fas fa-edit"></i>
+                                </a>
                                 <a href="#" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Borrar">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
-                                <a href="{{url('admin/usuarios/editar')}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar">
-                                    <i class="fas fa-edit"></i>
-                                </a>
+                                
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
+            
             <div class="right" id="right">
-                <a href="{{url ('admin/usuarios/registrar')}}" class="btn btn-success">
+                <a href="{{route('usuarios.crear')}}" class="btn btn-success">
                     Nuevo usuario
                     <i class="fas fa-plus"></i>
                 </a>

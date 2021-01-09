@@ -77,7 +77,17 @@ class RolController extends Controller
      */
     public function update(Request $request, Rol $rol)
     {
-        //
+        $nombreNuevo = $request->input('nombre');
+        $rol = $rol::find($request->id);
+        $rolId = $rol -> id;
+        $rolNombre = $rol -> nombre;
+
+        DB::table('rols')
+        ->where('id',$rolId)
+        ->where('nombre',$rolNombre)
+        ->update(['nombre' => $nombreNuevo]);
+
+        return redirect()->action([RolController::class, 'index']);
     }
 
     /**

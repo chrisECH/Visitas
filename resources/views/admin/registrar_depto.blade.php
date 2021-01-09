@@ -1,12 +1,12 @@
 @extends('admin/admin_demo')
 
-@section('title','| Registrar rol')
+@section('title','| Registrar departamento')
 
 @section('content')
 <div class="section section-page">
     <div class="container centrar">
         <h3 class="text mt-4">Registrar departamento.</h3>
-        <form method="post" action="{{route('rol.store')}}">
+        <form method="post" action="{{route('depto.store')}}">
             @csrf
             <div class="row">
                 <div class="form-group col-md-12">

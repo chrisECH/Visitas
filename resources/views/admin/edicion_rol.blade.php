@@ -6,7 +6,8 @@
     <div class="section page-section">
         <div class="container centrar">
             <h3 class="text">Editar rol</h3>
-            <form action="">
+            <form method="post" action="{{route('rol.update')}}">
+                @csrf
                 <div class="row">
                     <input type="hidden" value="{{$rol->id}}" name="id">
                     <div class="form-group col-md-12">
