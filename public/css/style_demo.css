@@ -40,6 +40,11 @@ a:hover {
 
 .avatar {
     max-width: 29px;
+    height: 29px;
+}
+
+.avatar img {
+    height: 100%;
 }
 
 @media(max-width: 768px) {

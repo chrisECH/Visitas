@@ -39,7 +39,7 @@ Route::get('/subdirector',[AdminController::class, 'indexSubdirector'])->middlew
 Route::get('/jefeDepto',[AdminController::class, 'indexJefeDepto'])->middleware('checkjefedepto')->name('jDepto.index');
 
 Route::get('/admin/perfil/{id}',[UserController::class, 'show'])->middleware('checkadmin')->name('admin.perfil');
-Route::post('/admin/perfil',[UserController::class, 'actFoto'])->middleware('checkadmin')->name('admin.foto_perfil');
+Route::post('/admin/perfil/',[UserController::class, 'actFoto'])->middleware('checkadmin')->name('admin.foto_perfil');
 
 
 

@@ -16,8 +16,8 @@ class CarreraController extends Controller
      */
     public function index()
     {
-        $carrera = Carrera::all();
-        return view('admin.admin_carreras',['carreras'=>$carrera]);
+        $carrera = Carrera::paginate(5);
+        return view('admin.admin_carreras', ['carreras' => $carrera]);
     }
 
     /**
@@ -38,33 +38,22 @@ class CarreraController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-           'abreviatura' => 'required|max:6',
-           'carrera' => 'required'
+        $request->validate([
+            'abreviatura' => 'required|alpha|max:6|unique:carreras,abreviatura',
+            'carrera' => 'required|unique:carreras,carrera'
         ]);
 
-        $abrevCarrera = $request->input('abreviatura');
-        $nombreCarrera = $request->input('nombre');
 
-        $abrCarreraDB = DB::table('carreras')->where('abreviatura',$abrevCarrera)->get();
-        $nombreCarreraDB = DB::table('carreras')->where('carrera',$nombreCarrera)->get();
+        $data = request();
+        DB::table('carreras')->insert([
+            'abreviatura' => $data['abreviatura'],
+            'carrera' => $data['carrera']
+        ]);
 
-        if($abrevCarrera != $abrCarreraDB){
-            if($nombreCarrera != $nombreCarreraDB){
-                $data = request();
+        return redirect()->action([CarreraController::class, 'index']);
 
-                DB::table('carreras')->insert([
-                    'abreviatura'=> $data['abreviatura'],
-                    'carrera' => $data['nombre']
-                ]);
-
-                return redirect()->action([CarreraController::class, 'index']);
-            }else{
-                echo "El nombre para esa carrera ya esta registrado.";
-            }
-        }else{
-            echo "Ya existe esa abreviatura";
-        }
+        return back()->withErrors(['nombre' => 'Ya hay una carrera con ese nombre.'])
+            ->withInput(request(['nombre', 'abreviatura']));
     }
 
     /**
@@ -87,7 +76,7 @@ class CarreraController extends Controller
     public function edit(Carrera $carrera, $id)
     {
         $carrera = $carrera::find($id);
-        return view('admin.edicion_carrera',['carrera'=>$carrera]);
+        return view('admin.edicion_carrera', ['carrera' => $carrera]);
     }
 
     /**
@@ -103,18 +92,17 @@ class CarreraController extends Controller
         $nombreNuevo = $request->input('nombre');
         $carrera = $carrera::find($request->id);
         $carreraId = $carrera->id;
-        $carreraAbrev = $carrera->abreviatura;
-        $carreraNombre = $carrera->carrera;
+        
+
         
         DB::table('carreras')
-        ->where('id',$carreraId)
-        ->update([
-            'abreviatura'=> $abreviaturaNueva,
-            'carrera'=> $nombreNuevo
-        ]);
+            ->where('id', $carreraId)
+            ->update([
+                'abreviatura' => $abreviaturaNueva,
+                'carrera' => $nombreNuevo
+            ]);
 
         return redirect()->action([CarreraController::class, 'index']);
-        
     }
 
     /**
@@ -126,7 +114,7 @@ class CarreraController extends Controller
     public function destroy(Carrera $carrera, $id)
     {
         $carreras = $carrera::find($id);
-        
+
         $carreras->delete();
 
         return redirect()->action([CarreraController::class, 'index']);

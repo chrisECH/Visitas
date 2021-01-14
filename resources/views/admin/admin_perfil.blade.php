@@ -11,7 +11,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 centrar">
-                        @if($user->foto == null)
+                        @if($user->foto == null )
                             <img src="{{asset('files/no-photo.png')}}" alt="foto de perfil" class="rounded-circle profile-image shadow">
                         @else
                             <img src="{{asset('profile-images/'.$user->foto)}}" alt="foto de perfil" class="rounded-circle profile-image shadow">

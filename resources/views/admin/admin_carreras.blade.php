@@ -57,6 +57,10 @@
                         @endforeach
                     </tbody>
                 </table>
+               
+            </div>
+            <div class="left">
+                {{$carreras->links()}}
             </div>
             <div class="right">
                 <a href="{{route('carrera.regis')}}" class="btn btn-success">

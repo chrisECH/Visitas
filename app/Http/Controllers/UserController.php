@@ -23,14 +23,14 @@ class UserController extends Controller
      */
     public function index()
     {
-        $depto = departamento::all();
+        $deptos = departamento::all();
         $users = DB::table('users')
             ->join('departamentos', 'users.depto_id', '=', 'departamentos.id')
             ->join('rols', 'users.rol_id', '=', 'rols.id')
             ->select('users.*', 'departamentos.nombre as deptoNombre', 'rols.nombre as rolNombre')
-            ->get();
+            ->paginate(5);
 
-        return view('admin.admin_users', ['users' => $users, 'deptos'=>$depto]);
+        return view('admin.admin_users', compact('users','deptos'));
     }
 
     /**
@@ -183,7 +183,7 @@ class UserController extends Controller
         }
 
         $user->save();
-        return route('admin.perfil');
+        return redirect()->action([AdminController::class, 'indexAdmin']);
     }
 
     public function busqueda(Request $request){

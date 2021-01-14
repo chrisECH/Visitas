@@ -90,6 +90,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{$users->links()}}
             </div>
             
             <div class="right" id="right">
