@@ -30,6 +30,7 @@
                         <p><i class="text-dark"><h3>Bienvenido al <span class="sgi">SGI</span></h3></i></p>
                         <h5 class=" text-dark">Proceso Vinculacion - Visitas a empresas.</h5>
                         <br>
+                        <div class="dropdown-divider"></div>
                         <h5>Ingrese sus datos de acceso</h5>
                         <br>
                     </div>

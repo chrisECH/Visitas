@@ -29,7 +29,7 @@
             </div>
             <div class="menu">
                 <a href="{{route('admin.index')}}" class="d-block text-light p-3"><i class="icon ion-md-home mr-2 lead"></i>Inicio</a>
-                <a href="{{route('admin.perfil')}}" class="d-block text-light p-3"><i class="icon ion-md-contact mr-2 lead"></i>Pefil</a>
+                <a href="{{route('admin.perfil',Auth::user()->id)}}" class="d-block text-light p-3"><i class="icon ion-md-contact mr-2 lead"></i>Pefil</a>
                 <a href="" class="d-block text-light p-3"><i class="icon ion-md-stats mr-2 lead"></i>Estadisticas</a>
                 <a href="{{url('/admin/solicitudes')}}" class="d-block text-light p-3"><i class="icon ion-md-document mr-2 lead"></i>Administrar Solicitudes</a>
                 <a href="{{route('usuarios.index')}}" class="d-block text-light p-3"><i class="icon ion-md-person-add mr-2 lead"></i>Administrar Usuarios</a>
@@ -44,12 +44,12 @@
         <div class="w-100">
             <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
                 <div class="container">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    {{-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
-                    </button>
+                    </button> --}}
                     
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto">
+{{--                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+ --}}                    <ul class="navbar-nav ml-auto">
                         
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -63,16 +63,23 @@
                             {{auth()->user()->nombre}}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Perfil</a>
+                                <a class="dropdown-item" href="{{route('admin.index')}}">Inicio</a>
+                                <a class="dropdown-item" href="{{route('admin.perfil',Auth::user()->id)}}">Perfil</a>
+                                <a class="dropdown-item" href="#">Etadisticas</a>
+                                <a class="dropdown-item" href="{{url('/admin/solicitudes')}}">Administrar solicitudes</a>
+                                <a class="dropdown-item" href="{{route('usuarios.index')}}">Administrar usuario</a>
+                                <a class="dropdown-item" href="{{route('rol.index')}}">Administrar roles</a>
+                                <a class="dropdown-item" href="{{route('depto.index')}}">Administrar departamentos</a>
+                                <a class="dropdown-item" href="{{route('carrera.index')}}">Administrar carreras</a>
                                 <a class="dropdown-item" href="#">Configuracion</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Cerrar sesión</a>
+                                <a class="dropdown-item" href="{{route('usuario.logout')}}">Cerrar sesión</a>
                             </div>
                         </li>
                     </ul>
                     
-                    </div>
-                </div>
+{{--                     </div>
+ --}}                </div>
               </nav>
 
               

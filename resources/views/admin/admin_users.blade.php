@@ -5,7 +5,8 @@
 @section('content')
     <div class="section page-section">
         <div class="container centrar shadow">
-            <form action="">
+            <form method="POST" action="{{route('usuarios.busqueda')}}">
+                @csrf
                 <div class="row bg-light">
                     <div class="col-md-6">
                         <input type="text" name="busqueda" class="form-control admin-item admin-search" placeholder="Buscar usuario">
@@ -55,9 +56,34 @@
                                 <a href="{{route('usuarios.editar',$user->id)}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="#" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Borrar">
+                                <a href="#" class="btn btn-danger" data-toggle="modal" data-placement="top" title="Borrar" data-target="#eliminarModal{{$user->id}}">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
+
+                                <div class="modal fade" id="eliminarModal{{$user->id}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel">Eliminar Usuario</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            </div>
+                                            <div class="modal-body">
+                                            ¿Seguro que quieres eliminar a <span> {{ $user->nombre}}? </span>
+                                            <span class="warning-user">Nota: al eliminar el usuario se eliminaran las solicitudes que haya realizado.</span>
+                                            </div>
+                                            <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                            <form method="post" action="{{route('usuarios.eliminar',$user->id)}}">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                                            </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 
                             </td>
                         </tr>

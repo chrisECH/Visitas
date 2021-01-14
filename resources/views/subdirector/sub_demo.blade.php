@@ -32,7 +32,7 @@
                 <a href="" class="d-block text-light p-3"><i class="icon ion-md-contact mr-2 lead"></i>Pefil</a>
                 <a href="" class="d-block text-light p-3"><i class="icon ion-md-document mr-2 lead"></i>Ver solicitudes</a>
                 <a href="" class="d-block text-light p-3"><i class="icon ion-md-settings mr-2 lead"></i>Configuración</a>
-                <a href="" class="d-block text-light p-3"><i class="icon ion-md-arrow-back mr-2 lead"></i>Cerrar sesiòn</a>
+                <a href="{{route('user.logout')}}" class="d-block text-light p-3"><i class="icon ion-md-arrow-back mr-2 lead"></i>Cerrar sesiòn</a>
             </div>
         </div>
 
@@ -51,13 +51,15 @@
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             
                             <img src="{{asset('files/no-photo.png')}}" class="img-fluid rounded-circle mr-2 avatar" alt="">  
-                            Christian Eduardo
+                            {{auth()->user()->nombre}}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Inicio</a>
                                 <a class="dropdown-item" href="#">Perfil</a>
+                                <a class="dropdown-item" href="#">Ver solicitudes</a>
                                 <a class="dropdown-item" href="#">Configuracion</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Cerrar sesión</a>
+                                <a class="dropdown-item" href="{{route('user.logout')}}">Cerrar sesión</a>
                             </div>
                         </li>
                     </ul>

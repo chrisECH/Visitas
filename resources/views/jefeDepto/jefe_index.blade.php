@@ -8,7 +8,7 @@
         <div class="container centrar">
             <div class="card">
                 <div class="card-header header">
-                  <h4>Bienvenido de nuevo usuario</h4>
+                  <h4>Bienvenido de nuevo {{auth()->user()->nombre}}</h4>
                   <h6>Iniciaste sesion como Jefe de Departamento.</h6>
                 </div>
                 <div class="card-body">

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,6 +31,8 @@
                 <a href="{{route('profe.index')}}" class="d-block text-light p-3"><i class="icon ion-md-home mr-2 lead"></i>Inicio</a>
                 <a href="" class="d-block text-light p-3"><i class="icon ion-md-contact mr-2 lead"></i>Pefil</a>
                 <a href="" class="d-block text-light p-3"><i class="icon ion-md-document mr-2 lead"></i>Crear Solicitud</a>
+                <a href="" class="d-block text-light p-3"><i class="icon ion-md-document mr-2 lead"></i>Consultar estado de solicitudes</a>
+                <a href="" class="d-block text-light p-3"><i class="icon ion-md-document mr-2 lead"></i>Ver solicitudes creadas</a>
                 <a href="" class="d-block text-light p-3"><i class="icon ion-md-settings mr-2 lead"></i>Configuración</a>
                 <a href="{{route('usuario.logout')}}" class="d-block text-light p-3"><i class="icon ion-md-arrow-back mr-2 lead"></i>Cerrar sesiòn</a>
             </div>
@@ -53,6 +55,10 @@
                             <img src="{{asset('files/no-photo.png')}}" class="img-fluid rounded-circle mr-2 avatar" alt="">  
                             {{auth()->user()->nombre}}                            </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Inicio</a>
+                                <a class="dropdown-item" href="#">Crear solicitud</a>
+                                <a class="dropdown-item" href="#">Consultar estado de solicitudes</a>
+                                <a class="dropdown-item" href="#">Ver solicitudes creadas</a>
                                 <a class="dropdown-item" href="#">Perfil</a>
                                 <a class="dropdown-item" href="#">Configuracion</a>
                                 <div class="dropdown-divider"></div>

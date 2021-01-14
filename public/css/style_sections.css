@@ -111,3 +111,31 @@ form .row .centrar button:hover {
     width: 60%;
     border: 1px solid #111c5d;
 }
+
+.profile-info {
+    text-align: center;
+    margin: 10px;
+    height: 350px;
+}
+
+.profile-info .card-body .card-title {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.profile-info .card-body .dropdown-divider {
+    margin-bottom: 30px;
+}
+
+.profile-info .card-body p {
+    font-weight: bold;
+    font-size: 17px;
+    padding: 5px;
+}
+
+.profile-info .card-body p span {
+    font-weight: lighter;
+    font-size: 17px;
+}

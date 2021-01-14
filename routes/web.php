@@ -7,7 +7,6 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CarreraController;
 use App\Http\Controllers\DepartamentoController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RolController;
 use App\Models\Rol;
 use App\Models\User;
@@ -38,7 +37,8 @@ Route::get('/admin',[AdminController::class, 'indexAdmin'])->middleware('checkad
 Route::get('/profesor',[AdminController::class, 'indexProfesor'])->middleware('checkprof')->name('profe.index');
 Route::get('/subdirector',[AdminController::class, 'indexSubdirector'])->middleware('checksubdirector')->name('sub.index');
 Route::get('/jefeDepto',[AdminController::class, 'indexJefeDepto'])->middleware('checkjefedepto')->name('jDepto.index');
-Route::get('/admin/perfil',[UserController::class, 'show'])->middleware('checkadmin')->name('admin.perfil');
+
+Route::get('/admin/perfil/{id}',[UserController::class, 'show'])->middleware('checkadmin')->name('admin.perfil');
 Route::post('/admin/perfil',[UserController::class, 'actFoto'])->middleware('checkadmin')->name('admin.foto_perfil');
 
 
@@ -48,7 +48,9 @@ Route::get('/admin/usuarios/registrar',[UserController::class, 'create'])->middl
 //Consultas a la BD para los usuarios.
 Route::post('/admin/usuarios/registrar',[UserController::class, 'store'])->middleware('checkadmin')->name('usuarios.store');
 Route::get('/admin/usuarios/editar/{id}',[UserController::class, 'edit'])->middleware('checkadmin')->name('usuarios.editar');
-Route::post('/admin/usuarios',[UserController::class, 'update'])->middleware('checkadmin')->name('usuarios.update');
+Route::post('/actualizar_usuario',[UserController::class, 'update'])->middleware('checkadmin')->name('usuarios.update');
+Route::post('/eliminar_usuario',[UserController::class, 'destroy'])->middleware('checkadmin')->name('usuarios.eliminar');
+Route::post('/admin/usuarios',[UserController::Class, 'busqueda'])->middleware('checkadmin')->name('usuarios.busqueda');
 
 
 Route::get('/admin/rol',[RolController::class, 'index'])->middleware('checkadmin')->name('rol.index');

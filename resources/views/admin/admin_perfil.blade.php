@@ -30,17 +30,20 @@
                     <div class="col-md-6">
                         <div class="card profile-info">
                             <div class="card-body">
-                                <h5>Telefono: <span>{{$user->telefono}}</span></h5>
-                                <h5>Email: <span>{{$user->email}}</span></h5>
-                                <h5>Departamento: <span>{{$user->deptoNombre}}</span></h5>
-                                <h5>Rol: <span>{{$user->rolNombre}}</span></h5>
+                                <h5 class="card-title">Acerca de mi:</h5>
+                                <div class="dropdown-divider"></div>
+                                <p>Telefono: <span>{{$user->telefono}}</span></p>
+                                <p>Email: <span>{{$user->email}}</span></p>
+                                <p>Departamento: <span>{{$user->deptoNombre}}</span></p>
+                                <p>Rol: <span>{{$user->rolNombre}}</span></p>
                             </div>
                         </div>
                     </div>
-                        @endforeach
+                        
                 </div>
             </div>
-    </form>
+         </form>
     </div>
     
 @endsection
+@endforeach

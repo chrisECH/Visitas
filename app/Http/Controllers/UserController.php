@@ -54,16 +54,16 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => 'required|min:2!max:100',
-            'apellidop' => 'required|alpha|min:2!max:100',
-            'apellidom' => 'required|alpha|min:2!max:100',
-            'telefono' => 'required|numeric',
-            'mail' => 'required|unique:users,email',
-            'password' => 'required|alpha_num|min:6',
-            'password_check' => 'required|alpha_num|same:password',
+            'nombre'            =>     'required|min:2!max:100',
+            'apellidop'         =>     'required|alpha|min:2!max:100',
+            'apellidom'         =>     'required|alpha|min:2!max:100',
+            'telefono'          =>     'required|numeric',
+            'mail'              =>     'required|unique:users,email',
+            'password'          =>     'required|alpha_num|min:6',
+            'password_check'    =>     'required|alpha_num|same:password',
         ], [
-            'mail.required' => 'El campo correo es obligatorio.',
-            'password_check.required' => 'Confirme la contraseña.'
+            'mail.required'     =>      'El campo correo es obligatorio.',
+            'password_check.required'=> 'Confirme la contraseña.'
         ]);
 
         $data = $request;
@@ -103,14 +103,19 @@ class UserController extends Controller
      * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $user,$id)
     {
+        $usuario = $user::find($id);
+        $userId = $usuario->id;
+
         $users = DB::table('users')
             ->join('departamentos', 'users.depto_id', '=', 'departamentos.id')
             ->join('rols', 'users.rol_id', '=', 'rols.id')
+            ->where('users.id',$userId)
             ->select('users.*', 'departamentos.nombre as deptoNombre', 'rols.nombre as rolNombre')
             ->get();
 
+            
             return view('admin.admin_perfil', ['users' => $users]);
     }
 
@@ -179,5 +184,17 @@ class UserController extends Controller
 
         $user->save();
         return route('admin.perfil');
+    }
+
+    public function busqueda(Request $request){
+        $users = DB::table('users')
+            ->join('departamentos', 'users.depto_id', '=', 'departamentos.id')
+            ->join('rols', 'users.rol_id', '=', 'rols.id')
+            ->select('users.*', 'departamentos.nombre as deptoNombre', 'rols.nombre as rolNombre')
+            ->where([['users.nombre','like','%'.$request->busqueda.'%'],['depto_id',$request->depto]])
+            ->get();
+            
+            $deptos = Departamento::all();
+            return view('admin.admin_users',['users'=>$users, 'deptos'=>$deptos]);
     }
 }
