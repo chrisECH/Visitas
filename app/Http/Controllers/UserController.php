@@ -25,7 +25,7 @@ class UserController extends Controller
     {
         $deptos = departamento::all();
         $users = DB::table('users')
-            ->join('departamentos', 'users.depto_id', '=', 'departamentos.id')
+            ->join('departamentos', 'users.departamento_id', '=', 'departamentos.id')
             ->join('rols', 'users.rol_id', '=', 'rols.id')
             ->select('users.*', 'departamentos.nombre as deptoNombre', 'rols.nombre as rolNombre')
             ->paginate(5);
@@ -88,7 +88,7 @@ class UserController extends Controller
                 'email'      =>    $data['mail'],
                 'password'   =>    Hash::make($data['password']),
                 'foto'       =>    null,
-                'depto_id'   =>    $data['depto'],
+                'departamento_id'   =>    $data['depto'],
                 'rol_id'     =>    $data['rol']
             ]);
 
@@ -109,15 +109,31 @@ class UserController extends Controller
         $userId = $usuario->id;
 
         $users = DB::table('users')
-            ->join('departamentos', 'users.depto_id', '=', 'departamentos.id')
+            ->join('departamentos', 'users.departamento_id', '=', 'departamentos.id')
             ->join('rols', 'users.rol_id', '=', 'rols.id')
             ->where('users.id',$userId)
             ->select('users.*', 'departamentos.nombre as deptoNombre', 'rols.nombre as rolNombre')
             ->get();
-
             
             return view('admin.admin_perfil', ['users' => $users]);
     }
+
+    public function showProfesor(User $user,$id){
+        $usuario = $user::find($id);
+        $userId = $usuario->id;
+
+        $users = DB::table('users')
+            ->join('departamentos', 'users.departamento_id', '=', 'departamentos.id')
+            ->join('rols', 'users.rol_id', '=', 'rols.id')
+            ->where('users.id',$userId)
+            ->select('users.*', 'departamentos.nombre as deptoNombre', 'rols.nombre as rolNombre')
+            ->get();
+            
+            return view('profesores.prof_perfil', ['users' => $users]);
+    }
+
+   
+
 
     /**
      * Show the form for editing the specified resource.
@@ -169,7 +185,15 @@ class UserController extends Controller
      */
     public function destroy(User $user, $id)
     {
-        //
+        $usuario = $user::find($id);
+        $usuarioId = $usuario->id;
+        $userLog = Auth::user()->id;
+        if($usuarioId == $userLog){
+            return back();
+        }
+        $usuario->delete();
+
+        return redirect()->action([UserController::class, 'index']);
     }
 
     public function actFoto(Request $request){
@@ -192,7 +216,7 @@ class UserController extends Controller
             ->join('rols', 'users.rol_id', '=', 'rols.id')
             ->select('users.*', 'departamentos.nombre as deptoNombre', 'rols.nombre as rolNombre')
             ->where([['users.nombre','like','%'.$request->busqueda.'%'],['depto_id',$request->depto]])
-            ->get();
+            ->paginate(5);
             
             $deptos = Departamento::all();
             return view('admin.admin_users',['users'=>$users, 'deptos'=>$deptos]);

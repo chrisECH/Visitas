@@ -8,6 +8,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CarreraController;
 use App\Http\Controllers\DepartamentoController;
 use App\Http\Controllers\RolController;
+use App\Http\Controllers\SolicitudController;
 use App\Models\Rol;
 use App\Models\User;
 
@@ -34,7 +35,6 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('usuario.logout')
 Route::get('/admin',[AdminController::class, 'indexAdmin'])->middleware('checkadmin')->name('admin.index');
 
 
-Route::get('/profesor',[AdminController::class, 'indexProfesor'])->middleware('checkprof')->name('profe.index');
 Route::get('/subdirector',[AdminController::class, 'indexSubdirector'])->middleware('checksubdirector')->name('sub.index');
 Route::get('/jefeDepto',[AdminController::class, 'indexJefeDepto'])->middleware('checkjefedepto')->name('jDepto.index');
 
@@ -49,8 +49,8 @@ Route::get('/admin/usuarios/registrar',[UserController::class, 'create'])->middl
 Route::post('/admin/usuarios/registrar',[UserController::class, 'store'])->middleware('checkadmin')->name('usuarios.store');
 Route::get('/admin/usuarios/editar/{id}',[UserController::class, 'edit'])->middleware('checkadmin')->name('usuarios.editar');
 Route::post('/actualizar_usuario',[UserController::class, 'update'])->middleware('checkadmin')->name('usuarios.update');
-Route::post('/eliminar_usuario',[UserController::class, 'destroy'])->middleware('checkadmin')->name('usuarios.eliminar');
-Route::post('/admin/usuarios',[UserController::Class, 'busqueda'])->middleware('checkadmin')->name('usuarios.busqueda');
+Route::delete('/eliminar_usuario/{id}',[UserController::class, 'destroy'])->middleware('checkadmin')->name('usuarios.eliminar');
+Route::post('/admin/usuarios',[UserController::class, 'busqueda'])->middleware('checkadmin')->name('usuarios.busqueda');
 
 
 Route::get('/admin/rol',[RolController::class, 'index'])->middleware('checkadmin')->name('rol.index');
@@ -80,6 +80,11 @@ Route::post('/admin/carreras', [CarreraController::class, 'update'])->middleware
 Route::delete('/admin/carreras/{id}', [CarreraController::class, 'destroy'])->middleware('checkadmin')->name('carrera.eliminar');
 
 
-Route::get('/admin/solicitudes',[AdminController::class, 'solicitudes'])->middleware('checkadmin'); 
 
+Route::get('/profesor',[AdminController::class, 'indexProfesor'])->middleware('checkprof')->name('profe.index');
+Route::get('/profesor/perfil/{id}', [UserController::class, 'showProfesor'])->middleware('checkprof')->name('profe.perfil');
 
+Route::get('/profesor/crear_solicitud',[SolicitudController::class, 'create'])->middleware('checkprof')->name('profe.crear_solicitud');
+Route::post('/profesor', [SolicitudController::class, 'store'])->middleware('checkprof')->name('profe.registrar_solicitud');
+Route::get('/profesor/solicitudes', [SolicitudController::class, 'show'])->middleware('checkprof')->name('profe.solicitudes');
+Route::get('/profesor/status-solicitud', [SolicitudController::class, 'status'])->middleware('checkprof')->name('profe.status_solicitud');

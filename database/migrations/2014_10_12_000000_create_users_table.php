@@ -25,6 +25,17 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verificado')->nullable();
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreignId('rol_id')->after('foto');
+            $table->foreignId('departamento_id')->after('foto');
+            $table->foreign('rol_id')
+                    ->references('id')->on('rols')
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
+            $table->foreign('departamento_id')
+                    ->references('id')->on('departamentos')
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
             
         });
     }

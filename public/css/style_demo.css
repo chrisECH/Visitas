@@ -38,6 +38,10 @@ a:hover {
     width: 18rem;
 }
 
+.nav-item {
+    margin-right: 70px;
+}
+
 .avatar {
     max-width: 29px;
     height: 29px;

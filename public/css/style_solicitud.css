@@ -1,0 +1,40 @@
+.section .centrar .card .card-body {
+    min-height: 500px;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.form-section {
+    display: none;
+}
+
+.centrar .form-navigation .registro {
+    background: #111c5d;
+    color: white;
+}
+
+.centrar .form-navigation .btn-anterior {
+    background: #898a89;
+    color: white;
+}
+
+.centrar .form-navigation .btn-siguiente {
+    background: #08800e;
+    color: white;
+}
+
+hr {
+    display: block;
+    position: relative;
+    padding: 0;
+    margin: 8px auto;
+    height: 0;
+    width: 100%;
+    max-height: 0;
+    font-size: 1px;
+    line-height: 0;
+    clear: both;
+    border: none;
+    border-top: 1px solid #aaaaaa;
+    border-bottom: 1px solid #ffffff;
+}

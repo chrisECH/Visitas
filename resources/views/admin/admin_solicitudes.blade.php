@@ -35,9 +35,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="right">
-                <a href="#" class="btn btn-success">Nueva Solicitud<i class="fas fa-plus"></i></a>
-            </div>
+            
         </div>
     </div>
 @endsection

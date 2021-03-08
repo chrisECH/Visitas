@@ -75,7 +75,7 @@
                                             </div>
                                             <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                            <form method="post" action="{{route('usuarios.eliminar',$user->id)}}">
+                                            <form method="POST" action="{{route('usuarios.eliminar',$user->id)}}">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" class="btn btn-danger">Eliminar</button>

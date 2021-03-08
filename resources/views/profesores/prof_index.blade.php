@@ -13,7 +13,7 @@
                 </div>
                 <div class="card-body">
                   <blockquote class="blockquote mb-0">
-                    <p>Ahora podrás crear solicitudes para visitar empresas, así como consultar el proceso de estas.
+                    <p>Ahora podrás crear solicitudes para visitar empresas, así como consultar el status de estas.
                     </p>
                   </blockquote>
                 </div>

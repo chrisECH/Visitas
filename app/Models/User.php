@@ -11,6 +11,8 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -50,6 +52,10 @@ class User extends Authenticatable
     //Relacion uno a muchos rols
     public function rol(){
         return $this -> belongsTo('App\Models\Rol');
+    }
+
+    public function solicitud(){
+        return $this -> hasMany('App\Models\Solicitud');
     }
   
 }
