@@ -27,8 +27,6 @@ class CreateInfoInstanciasTable extends Migration
 
             $table->string('instanciaSustituta')->nullable();
             $table->string('entidadSustituta')->nullable();
-            $table->date('fechaSustituta')->nullable();
-            $table->time('horaSustituta')->nullable();
             $table->string('domicilioSustituta')->nullable();
             $table->string('contactoSustituta')->nullable();
             $table->string('puestoSustituta')->nullable();
