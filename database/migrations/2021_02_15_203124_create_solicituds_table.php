@@ -17,7 +17,7 @@ class CreateSolicitudsTable extends Migration
             $table->id();
             $table->string('folio',25);
             $table->string('tipoVisita',25)->nullable();
-            $table->char('atorizacion', 1)->comment('0 = no autorizado, 1 = autorizado, 2 = pendiente por autorizar, 3=cancelada'); 
+            $table->char('autorizacion', 1)->comment('0 = no autorizado, 1 = autorizado, 2 = pendiente por autorizar, 3=cancelada'); 
             $table->text('observaciones')->nullable();
             $table->foreignId('user_id')->nullable();
 
