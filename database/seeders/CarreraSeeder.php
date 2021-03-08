@@ -16,7 +16,7 @@ class CarreraSeeder extends Seeder
     {
         DB::table('carreras')->insert([
             'abreviatura' => 'IELE',
-            'carrera' => 'Ingenieríaa Eléctrica'
+            'carrera' => 'Ingeniería Eléctrica'
         ]);
 
         DB::table('carreras')->insert([
