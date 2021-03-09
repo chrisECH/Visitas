@@ -18,9 +18,9 @@ class CreateInfoAcademicasTable extends Migration
             $table->string('asignatura1',100);
             $table->integer('semestre1');
             $table->integer('numAlumnos1');
-            $table->string('asignatura2',100);
-            $table->integer('semestre2');
-            $table->integer('numAlumnos2');
+            $table->string('asignatura2',100)->nullable();
+            $table->integer('semestre2')->nullable();
+            $table->integer('numAlumnos2')->nullable();
             $table->integer('totalAlumnos');
             $table->text('objetivo');
             $table->foreignId('solicitud_id');

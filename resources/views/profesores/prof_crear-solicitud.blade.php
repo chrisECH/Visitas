@@ -170,7 +170,7 @@
                            
                             <div class="form-group col-md-4 col-sm-4">
                                 <label for="totalAlumn">Total de alumnos</label>
-                                <input type="number" class="form-control" name="totalAlumn @error('totalAlumn') is-invalid @enderror" id="totalAlumn" >
+                                <input type="number" class="form-control @error('totalAlumn') is-invalid @enderror" name="totalAlumn" id="totalAlumn" >
                                 @error('totalAlumn')
                                     <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{$message}}</strong>

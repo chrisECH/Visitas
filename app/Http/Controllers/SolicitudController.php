@@ -8,6 +8,7 @@ use App\Models\Carrera;
 use App\Models\InfoAcademica;
 use App\Models\InfoDocente;
 use App\Models\InfoInstancia;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -32,7 +33,8 @@ class SolicitudController extends Controller
     public function create()
     {
         $solicitud = DB::table('solicituds')->latest('id')->first();
-        $solicitud = $solicitud + 1;
+        if($solicitud == null) $solicitud = $solicitud + 1;
+        else $solicitud = $solicitud->id + 1;
         
         $carreras = carrera::all();
         return view('profesores.prof_crear-solicitud', compact('carreras'), compact('solicitud'));
@@ -123,10 +125,78 @@ class SolicitudController extends Controller
       if($request->numVisita < 9) $folio = $carreraAbreviado. $request->diaSolicitud.$request->mesSolicitud.$request->anioSolicitud.'0'.$numVisita.$request->tipoVisita.$request->visitasDe;
       else $folio = $carreraAbreviado. $request->diaSolicitud.$request->mesSolicitud.$request->anioSolicitud.$numVisita.$request->tipoVisita.$request->visitasDe;
       $user = Auth::user();
+    
+      $folioDB = DB::table('solicituds')->where('folio',$folio)->get();
+      if(count($folioDB)!=0){
+          return back()->withErrors(['folio' => 'El número de folio ya se encuentra regitrsado.']);
+      }
       
-      dd();
+
+
+      DB::table('solicituds')->insert([
+        'folio'             => $folio,
+        'autorizacion'      => 2,
+        'user_id'           => $user->id
+      ]);
+
+      $solicitudId = DB::table('solicituds')
+                    ->latest('id')
+                    ->first();
+
+     DB::table('info_academicas')->insert([
+        'asignatura1'       => $request->asignatura1,
+        'semestre1'         => $request->semestre1,
+        'numAlumnos1'       => $request->numAlumnos1,
+        'asignatura2'       => $request->asignatura2,
+        'semestre2'         => $request->semestre2,
+        'numAlumnos2'       => $request->numAlumnos2,
+        'totalAlumnos'      => $request->totalAlumn,
+        'objetivo'          => $request->objetivo,
+        'solicitud_id'      => $solicitudId->id
+      ]);
+
+      DB::table('info_docentes')->insert([
+          'docentePrincipal'    => $request->docentePrinc,
+          'emailPrincipal'      => $request->emailPrinc,
+          'telefonoPrincipal'   => $request->telefonoPrinc,
+          'docenteAcom'         => $request->docenteAcom,
+          'emailAcom'           => $request->emailAcom,
+          'telefonoAcom'        => $request->telefonoAcom,
+          'docenteSuplente'     => $request->docenteSupl,
+          'emailSuplente'       => $request->emailSupl,
+          'telefonoSuplente'    => $request->telefonoSupl,
+          'solicitud_id'        => $solicitudId->id
+      ]);
+
+      DB::table('info_instancias')->insert([
+        'instancia'             => $request->instancia,
+        'entidad'               => $request->entidad,
+        'fecha'                 => $request->fecha,
+        'hora'                  => $request->hora,
+        'domicilio'             => $request->domicilio,
+        'contacto'              => $request->contacto,
+        'puesto'                => $request->puesto,
+        'telefono'              => $request->telContacto,
+        'correo'                => $request->emailContacto,
+        'instanciaSustituta'    => $request->instanciaSust,
+        'entidadSustituta'      => $request->entidadSust,
+        'domicilioSustituta'    => $request->domicilioSust,
+        'contactoSustituta'     => $request->contactoSust,
+        'puestoSustituta'       => $request->puestoSust,
+        'telefonoSustituta'     => $request->telContactoSust,
+        'correoSustituta'       => $request->emailContactoSust,
+        'solicitud_id'          => $solicitudId->id
+
+      ]);
+      
+      
+        return redirect()->action([AdminController::indexProfesor]);
        
 
+    }
+
+    public function insertDocente($request){
+        
     }
 
     /**
