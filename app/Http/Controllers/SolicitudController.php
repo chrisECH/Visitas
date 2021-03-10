@@ -128,7 +128,7 @@ class SolicitudController extends Controller
     
       $folioDB = DB::table('solicituds')->where('folio',$folio)->get();
       if(count($folioDB)!=0){
-          return back()->withErrors(['folio' => 'El número de folio ya se encuentra regitrsado.']);
+          return back()->withErrors(['folio' => 'El número de folio ya se encuentra registrado.']);
       }
       
 
@@ -190,15 +190,10 @@ class SolicitudController extends Controller
       ]);
       
       
-        return redirect()->action([AdminController::indexProfesor]);
+        return redirect()->action([SolicitudController::class,'status']);
        
 
     }
-
-    public function insertDocente($request){
-        
-    }
-
     /**
      * Display the specified resource.
      *
@@ -207,11 +202,25 @@ class SolicitudController extends Controller
      */
     public function show(Solicitud $solicitud)
     {
-        return view('profesores.prof_solicitudes');
+        
+        $datosSolicituds = DB::table('solicituds')
+                            ->join('info_instancias','solicituds.id','=','info_instancias.solicitud_id')
+                            ->where('solicituds.user_id','=',Auth::user()->id)
+                            ->select('solicituds.id','solicituds.folio','solicituds.autorizacion','info_instancias.instancia as empresa',
+                            'info_instancias.entidad as entidad','info_instancias.fecha as fecha')
+                            ->get();
+
+        return view('profesores.prof_solicitudes',['solicituds' => $datosSolicituds]);
     }
 
     public function status(){
-        return view('profesores.prof_status');
+        $statusSolicitud = DB::table('solicituds')
+                            ->join('info_instancias','solicituds.id','=','info_instancias.solicitud_id')
+                            ->where('solicituds.user_id','=',Auth::user()->id)
+                            ->select('solicituds.id','solicituds.folio','solicituds.autorizacion','solicituds.observaciones','info_instancias.instancia as empresa',
+                            'info_instancias.entidad as entidad','info_instancias.fecha as fecha')
+                            ->get();
+        return view('profesores.prof_status',['solicituds' => $statusSolicitud]);
     }
 
     /**
@@ -243,8 +252,29 @@ class SolicitudController extends Controller
      * @param  \App\Models\Solicitud  $solicitud
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Solicitud $solicitud)
+    public function destroy(Solicitud $solicitud,$id)
     {
-        //
+        $solicitud = $solicitud::find($id);
+        
+        DB::table('solicituds')
+        ->where('id','=',$solicitud->id)
+        ->update([
+            'autorizacion' => 3
+        ]);
+
+        return redirect()->action([SolicitudController::class,'show']);
+    }
+
+    //Funcion para el administrador
+    public function allSolicitud(){
+        $solicitudes = DB::table('solicituds')
+                    ->join('info_instancias','solicituds.id','=','info_instancias.solicitud_id')
+                    ->join('info_docentes','solicituds.id','=','info_docentes.solicitud_id')
+                    ->select('solicituds.id','solicituds.folio','solicituds.autorizacion','info_instancias.instancia as empresa',
+                    'info_docentes.docentePrincipal as docente','info_docentes.emailPrincipal as email')
+                    ->get();
+
+        
+        return view('admin.admin_solicitudes', ['solicitudes' => $solicitudes]);
     }
 }
