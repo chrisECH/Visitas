@@ -17,15 +17,32 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
+                        @foreach ($solicituds as $solicitud)
                         <tr>
-                            <th scope="row"></th>
-                            <th scope="row"></th>
-                            <th scope="row"></th>
-                            <th scope="row"></th>
-                            <th scope="row"></th>
+                            <th scope="row">{{$solicitud->folio}}</th>
+                            <th scope="row">{{$solicitud->empresa}}</th>
+                            <th scope="row">{{$solicitud->fecha}}</th>
+                            <th scope="row">@switch($solicitud->autorizacion)
+                                @case(0)
+                                    No autorizado
+                                    @break
+                                @case(1)
+                                    Autorizado
+                                    @break
+                                @case(2)
+                                    Pendiente
+                                    @break
+
+                                @case(3)
+                                    Cancelada
+                                    @break
+                                @default
+                                    
+                            @endswitch
+                            </th>
+                            <th scope="row">{{$solicitud->observaciones}}</th>
                         </tr>
-                        
+                       @endforeach 
                     </tbody>
                 </table>
             
