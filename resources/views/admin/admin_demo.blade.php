@@ -32,7 +32,7 @@
                 <a href="{{route('admin.index')}}" class="d-block text-light p-3"><i class="icon ion-md-home mr-2 lead"></i>Inicio</a>
                 <a href="{{route('admin.perfil',Auth::user()->id)}}" class="d-block text-light p-3"><i class="icon ion-md-contact mr-2 lead"></i>Pefil</a>
                 <a href="" class="d-block text-light p-3"><i class="icon ion-md-stats mr-2 lead"></i>Estadisticas</a>
-                <a href="{{url('/admin/solicitudes')}}" class="d-block text-light p-3"><i class="icon ion-md-document mr-2 lead"></i>Administrar Solicitudes</a>
+                <a href="{{route('admin.solicitudes')}}" class="d-block text-light p-3"><i class="icon ion-md-document mr-2 lead"></i>Administrar Solicitudes</a>
                 <a href="{{route('usuarios.index')}}" class="d-block text-light p-3"><i class="icon ion-md-person-add mr-2 lead"></i>Administrar Usuarios</a>
                 <a href="{{route('rol.index')}}" class="d-block text-light p-3"><i class="icon ion-md-contacts mr-2 lead"></i>Administrar Roles</a>
                 <a href="{{route('depto.index')}}" class="d-block text-light p-3"><i class="icon ion-md-list mr-2 lead"></i>Administrar Departamentos</a>
