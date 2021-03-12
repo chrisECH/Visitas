@@ -22,7 +22,25 @@
                         <tr>
                             <th scope="row">{{$solicitud->folio}}</th>
                             <th scope="row">{{$solicitud->empresa}}</th>
-                            <th scope="row">{{$solicitud->autorizacion}}</th>
+                            <th scope="row">
+                                @switch($solicitud->autorizacion)
+                                @case(0)
+                                    No autorizado
+                                    @break
+                                @case(1)
+                                    Autorizado
+                                    @break
+                                @case(2)
+                                    Pendiente
+                                    @break
+
+                                @case(3)
+                                    Cancelada
+                                    @break
+                                @default
+                                    
+                                @endswitch
+                            </th>
                             <th scope="row">{{$solicitud->docente}}</th>
                             <th scope="row">{{$solicitud->email}}</th>
                             

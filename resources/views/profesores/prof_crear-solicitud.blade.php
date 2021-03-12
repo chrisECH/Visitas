@@ -196,7 +196,7 @@
                             
                             <div class="form-group col-md-6 col-sm-12">
                                 <label for="docentePrinc">Docente responsable</label>
-                                <input type="text" class="form-control @error('docentePrinc') is-invalid @enderror" name="docentePrinc" id="docentePrinc" value="{{old('docentePrinc')}}">
+                                <input type="text" class="form-control @error('docentePrinc') is-invalid @enderror" name="docentePrinc" id="docentePrinc" value="{{Auth::user()->nombre." ".Auth::user()->apellidop." ".Auth::user()->apellidom}}" disabled>
                                 @error('docentePrinc')
                                     <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{$message}}</strong>
@@ -205,7 +205,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="emailPrinc">Correo electronico</label>
-                                <input type="email" class="form-control @error('emailPrinc') is-invalid @enderror" name="emailPrinc" id="emailPrinc" value="{{old('emailPrinc')}}">
+                                <input type="email" class="form-control @error('emailPrinc') is-invalid @enderror" name="emailPrinc" id="emailPrinc" value="{{Auth::user()->email}}" disabled>
                                 @error('emailPrinc')
                                     <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{$message}}</strong>
@@ -214,7 +214,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="telefonoPrinc">Telefono</label>
-                                <input type="text" class="form-control @error('telefonoPrinc') is-invalid @enderror" name="telefonoPrinc" id="telefonoPrinc" value="{{old('telefonoPrinc')}}">
+                                <input type="text" class="form-control @error('telefonoPrinc') is-invalid @enderror" name="telefonoPrinc" id="telefonoPrinc" value="{{Auth::user()->telefono}}" disabled>
                                 @error('telefonoPrinc')
                                     <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{$message}}</strong>

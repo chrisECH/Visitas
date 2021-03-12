@@ -75,9 +75,9 @@ class SolicitudController extends Controller
 
        //Valida campos del docente
        $request->validate([
-           'docentePrinc'           => 'required|string',
+          /*  'docentePrinc'           => 'required|string',
            'emailPrinc'             => 'required|email',
-           'telefonoPrinc'          => 'required|numeric',
+           'telefonoPrinc'          => 'required|numeric', */
 
            'docenteAcom'            => 'nullable|string',
            'emailAcom'              => 'nullable|email',
@@ -156,9 +156,9 @@ class SolicitudController extends Controller
       ]);
 
       DB::table('info_docentes')->insert([
-          'docentePrincipal'    => $request->docentePrinc,
-          'emailPrincipal'      => $request->emailPrinc,
-          'telefonoPrincipal'   => $request->telefonoPrinc,
+          'docentePrincipal'    => Auth::user()->nombre." ".Auth::user()->apellidop." ".Auth::user()->apellidom,
+          'emailPrincipal'      => Auth::user()->email,
+          'telefonoPrincipal'   => Auth::user()->telefono,
           'docenteAcom'         => $request->docenteAcom,
           'emailAcom'           => $request->emailAcom,
           'telefonoAcom'        => $request->telefonoAcom,
