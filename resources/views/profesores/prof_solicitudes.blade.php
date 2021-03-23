@@ -49,7 +49,7 @@
                                 @if($solicitud->autorizacion == 3 || $solicitud->autorizacion == 0)
                                    
                                     @else
-                                    <a href="" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar">
+                                    <a href="{{route('profe.editar_solicitud',$solicitud->id)}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar">
                                         Editar
                                     </a>
                                 @endif

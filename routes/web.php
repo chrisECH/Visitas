@@ -87,7 +87,11 @@ Route::get('/profesor',[AdminController::class, 'indexProfesor'])->middleware('c
 Route::get('/profesor/perfil/{id}', [UserController::class, 'showProfesor'])->middleware('checkprof')->name('profe.perfil');
 
 Route::get('/profesor/crear_solicitud',[SolicitudController::class, 'create'])->middleware('checkprof')->name('profe.crear_solicitud');
-Route::post('/profesor', [SolicitudController::class, 'store'])->middleware('checkprof')->name('profe.registrar_solicitud');
 Route::get('/profesor/solicitudes', [SolicitudController::class, 'show'])->middleware('checkprof')->name('profe.solicitudes');
-Route::delete('/cancelar_solicitud/{id}',[SolicitudController::class, 'destroy'])->middleware('checkprof')->name('profe.cancelar_solicitud');
 Route::get('/profesor/status-solicitud', [SolicitudController::class, 'status'])->middleware('checkprof')->name('profe.status_solicitud');
+Route::get('/pofesor/editar_solicitud/{id}', [SolicitudController::class, 'edit'])->middleware('checkprof')->name('profe.editar_solicitud');
+
+
+Route::post('/profesor', [SolicitudController::class, 'store'])->middleware('checkprof')->name('profe.registrar_solicitud');
+Route::delete('/cancelar_solicitud/{id}',[SolicitudController::class, 'destroy'])->middleware('checkprof')->name('profe.cancelar_solicitud');
+Route::post('/actualizar_solicitud',[SolicitudController::class, 'validar'])->middleware('checkprof')->name('profe.actualizar_solicitud');
