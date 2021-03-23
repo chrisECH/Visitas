@@ -46,7 +46,7 @@
                             @endswitch
                             </th>
                             <td>
-                                @if($solicitud->autorizacion == 3 || $solicitud->autorizacion == 0)
+                                @if($solicitud->autorizacion == 3 || $solicitud->autorizacion == 0 || $solicitud->autorizacion == 1)
                                    
                                     @else
                                     <a href="{{route('profe.editar_solicitud',$solicitud->id)}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar">
