@@ -94,4 +94,4 @@ Route::get('/pofesor/editar_solicitud/{id}', [SolicitudController::class, 'edit'
 
 Route::post('/profesor', [SolicitudController::class, 'store'])->middleware('checkprof')->name('profe.registrar_solicitud');
 Route::delete('/cancelar_solicitud/{id}',[SolicitudController::class, 'destroy'])->middleware('checkprof')->name('profe.cancelar_solicitud');
-Route::post('/actualizar_solicitud',[SolicitudController::class, 'validar'])->middleware('checkprof')->name('profe.actualizar_solicitud');
+Route::post('/profesor/solicitudes',[SolicitudController::class, 'update'])->middleware('checkprof')->name('profe.actualizar_solicitud');

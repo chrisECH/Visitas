@@ -17,18 +17,19 @@
                     <div class="form-section">
                         <h3>Información academica</h3>
                         <div class="row">
-                            
+                            <input type="hidden" value="{{$solicitud->id}}" name="id">
+
                             <div class="col-md-1"></div>
                             <label for="folio">Folio</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" name="folio" id="folio" value="{{$solicitud->folio}}">
+                                <input type="text" class="form-control" name="folio" id="folio" value="{{$solicitud->folio}}" disabled>
                             </div>
                             
                             <hr>
                             
                             <div class="form-group col-md-7 col-sm-7">
                                 <label for="asignatura1">Asignatura 1</label>
-                                <input type="text" class="form-control @error('asignatura1') is-invalid @enderror" name="asignatura1" id="asignatura1" value="{{$solicitud->asignatura1}}"">
+                                <input type="text" class="form-control @error('asignatura1') is-invalid @enderror" name="asignatura1" id="asignatura1" value="{{$solicitud->asignatura1}}">
                                 @error('asignatura1')
                                     <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{$message}}</strong>

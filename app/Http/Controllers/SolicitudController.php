@@ -284,11 +284,7 @@ class SolicitudController extends Controller
             'objetivo'       => 'required|string'
 
         ], [
-            'diaSolicitud.max'       => 'El dia no debe ser ser mayor a 31',
-            'diaSolicitu.regex'      => 'No cumple con el formato establecido',
-            'anioSolicitud.regex'    => 'No cumple con el formato establecido',
-            'numVisita.required'     => 'El numero de visita es obligatorio',
-            'visitasDe.regex'        => 'No cumple con el formato establecido',
+            
             'objetivo.required'      => 'El objetivo es obligatorio'
         ]);
 
@@ -315,7 +311,7 @@ class SolicitudController extends Controller
 
         //valida campos de la instancia
         $request->validate([
-            'fecha'                  => 'required|date|after:+1 week',
+            'fecha'                  => 'required|date|after:+1 day',
             'hora'                   => 'required',
             'instancia'              => 'required|string',
             'entidad'                => 'required|string',
@@ -336,6 +332,63 @@ class SolicitudController extends Controller
             'telContacto.numeric'       => 'El telefono debe de ser numerico',
             'telContactoSust.'          => 'El telefono debe de ser numerico'
         ]);
+
+        $solicitud = $solicitud::find($request->id);
+        
+
+        DB::table('info_academicas')
+        ->join('solicituds','info_academicas.solicitud_id','=','solicituds.id')
+        ->where('solicituds.id',$solicitud->id)
+        ->update([
+            'asignatura1'       => $request->asignatura1,
+            'semestre1'         => $request->semestre1,
+            'numAlumnos1'       => $request->numAlumnos1,
+            'asignatura2'       => $request->asignatura2,
+            'semestre2'         => $request->semestre2,
+            'numAlumnos2'       => $request->numAlumnos2,
+            'totalAlumnos'      => $request->totalAlumn,
+            'objetivo'          => $request->objetivo
+        ]);
+
+        DB::table('info_docentes')
+        ->join('solicituds','info_docentes.solicitud_id','=','solicituds.id')
+        ->where('solicituds.id',$solicitud->id)
+        ->update([
+            'docentePrincipal'    => Auth::user()->nombre . " " . Auth::user()->apellidop . " " . Auth::user()->apellidom,
+            'emailPrincipal'      => Auth::user()->email,
+            'telefonoPrincipal'   => Auth::user()->telefono,
+            'docenteAcom'         => $request->docenteAcom,
+            'emailAcom'           => $request->emailAcom,
+            'telefonoAcom'        => $request->telefonoAcom,
+            'docenteSuplente'     => $request->docenteSupl,
+            'emailSuplente'       => $request->emailSupl,
+            'telefonoSuplente'    => $request->telefonoSupl
+        ]);
+
+        DB::table('info_instancias')
+        ->join('solicituds','info_instancias.solicitud_id','=','solicituds.id')
+        ->where('solicituds.id',$solicitud->id)
+        ->update([
+            'instancia'             => $request->instancia,
+            'entidad'               => $request->entidad,
+            'fecha'                 => $request->fecha,
+            'hora'                  => $request->hora,
+            'domicilio'             => $request->domicilio,
+            'contacto'              => $request->contacto,
+            'puesto'                => $request->puesto,
+            'telefono'              => $request->telContacto,
+            'correo'                => $request->emailContacto,
+            'instanciaSustituta'    => $request->instanciaSust,
+            'entidadSustituta'      => $request->entidadSust,
+            'domicilioSustituta'    => $request->domicilioSust,
+            'contactoSustituta'     => $request->contactoSust,
+            'puestoSustituta'       => $request->puestoSust,
+            'telefonoSustituta'     => $request->telContactoSust,
+            'correoSustituta'       => $request->emailContactoSust
+        ]);
+
+        return redirect()->action([SolicitudController::class, 'show']);
+        
     }
 
     /**
