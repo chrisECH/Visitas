@@ -36,7 +36,7 @@ Route::get('/admin',[AdminController::class, 'indexAdmin'])->middleware('checkad
 
 
 Route::get('/subdirector',[AdminController::class, 'indexSubdirector'])->middleware('checksubdirector')->name('sub.index');
-Route::get('/jefeDepto',[AdminController::class, 'indexJefeDepto'])->middleware('checkjefedepto')->name('jDepto.index');
+
 
 Route::get('/admin/perfil/{id}',[UserController::class, 'show'])->middleware('checkadmin')->name('admin.perfil');
 Route::post('/admin/perfil/',[UserController::class, 'actFoto'])->middleware('checkadmin')->name('admin.foto_perfil');
@@ -82,7 +82,7 @@ Route::post('/admin/carreras', [CarreraController::class, 'update'])->middleware
 Route::delete('/admin/carreras/{id}', [CarreraController::class, 'destroy'])->middleware('checkadmin')->name('carrera.eliminar');
 
 
-
+//Rutas para los profesores
 Route::get('/profesor',[AdminController::class, 'indexProfesor'])->middleware('checkprof')->name('profe.index');
 Route::get('/profesor/perfil/{id}', [UserController::class, 'showProfesor'])->middleware('checkprof')->name('profe.perfil');
 
@@ -95,3 +95,10 @@ Route::get('/pofesor/editar_solicitud/{id}', [SolicitudController::class, 'edit'
 Route::post('/profesor', [SolicitudController::class, 'store'])->middleware('checkprof')->name('profe.registrar_solicitud');
 Route::delete('/cancelar_solicitud/{id}',[SolicitudController::class, 'destroy'])->middleware('checkprof')->name('profe.cancelar_solicitud');
 Route::post('/profesor/solicitudes',[SolicitudController::class, 'update'])->middleware('checkprof')->name('profe.actualizar_solicitud');
+
+
+//Rutas para los jefes de departamentos
+Route::get('/jefeDepto',[AdminController::class, 'indexJefeDepto'])->middleware('checkjefedepto')->name('jDepto.index');
+Route::get('/jefeDepto/perfil/{id}', [UserController::class, 'showJefeDepto'])->middleware('checkjefedepto')->name('jDepto.perfil');
+Route::get('/jefeDepto/solicitudes',[SolicitudController::class, 'solicitudesJefeDepto'])->middleware('checkjefedepto')->name('jDepto.solicitudes');
+Route::post('/jefeDepto',[SolicitudController::class, 'completarSolicitud'])->middleware('checkjefedepto')->name('jDepto.completarSolicitud');

@@ -434,4 +434,75 @@ class SolicitudController extends Controller
 
         return view('admin.admin_solicitudes', ['solicitudes' => $solicitudes]);
     }
+
+
+    //Funciones para el jefe de departamento
+    public function solicitudesJefeDepto(){
+        $solicitudes = DB::table('solicituds')
+        ->join('users','solicituds.user_id','=','users.id')
+        ->join('info_instancias', 'solicituds.id', '=', 'info_instancias.solicitud_id')
+        ->join('info_docentes', 'solicituds.id', '=', 'info_docentes.solicitud_id')
+        ->join('info_academicas','info_academicas.solicitud_id','=','solicituds.id')
+        ->where('users.departamento_id',Auth::user()->departamento_id)
+        ->get();
+        
+        return view('jefeDepto.jefe_solicitudes', ['solicitudes' => $solicitudes]);
+    }
+
+    public function completarSolicitud(Request $request){
+        switch ($request->tipoSolicitud){
+            case 1: 
+                $tipoSolicitud = "Foránea institucional";
+                DB::table('solicituds')
+                ->where('id',$request->idSolicitud)
+                ->update([
+                    'tipoVisita'    => $tipoSolicitud
+                ]);
+                return redirect()->action([SolicitudController::class,'solicitudesJefeDepto']);
+                break;
+
+            case 2: 
+                $tipoSolicitud = "Foránea autogenerada";
+                DB::table('solicituds')
+                ->where('id',$request->idSolicitud)
+                ->update([
+                    'tipoVisita'    => $tipoSolicitud
+                ]);
+                return redirect()->action([SolicitudController::class,'solicitudesJefeDepto']);
+                break;
+
+            case 3: 
+                $tipoSolicitud = "Local con transporte";
+                DB::table('solicituds')
+                ->where('id',$request->idSolicitud)
+                ->update([
+                    'tipoVisita'    => $tipoSolicitud
+                ]);
+                return redirect()->action([SolicitudController::class,'solicitudesJefeDepto']);
+                break;
+
+            case 4: 
+                $tipoSolicitud = "Foránea complementaria";
+                DB::table('solicituds')
+                ->where('id',$request->idSolicitud)
+                ->update([
+                    'tipoVisita'    => $tipoSolicitud
+                ]);
+                return redirect()->action([SolicitudController::class,'solicitudesJefeDepto']);
+                break;
+
+            case 5:
+                $tipoSolicitud = "Local sin transporte";
+                DB::table('solicituds')
+                ->where('id',$request->idSolicitud)
+                ->update([
+                    'tipoVisita'    => $tipoSolicitud
+                ]);
+                return redirect()->action([SolicitudController::class,'solicitudesJefeDepto']);
+                break;
+
+            default:
+            return redirect()->action([SolicitudController::class,'solicitudesJefeDepto']);
+        }
+    }
 }
