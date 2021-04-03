@@ -23,6 +23,34 @@ class DepartamentosSeeder extends Seeder
         DB::table('departamentos')->insert([
             'nombre' => 'Departamento de Desarrollo Academico',
         ]);
+        DB::table('departamentos')->insert([
+            'nombre' => 'Departamento de Ingeniería Eléctrica',
+        ]);
+        DB::table('departamentos')->insert([
+            'nombre' => 'Departamento de Gestión Empresarial',
+        ]);
+        DB::table('departamentos')->insert([
+            'nombre' => 'Departamento de Ingeniería Industrial',
+        ]);
+        DB::table('departamentos')->insert([
+            'nombre' => 'Departamento de Ingeniería Informática',
+        ]);
+        DB::table('departamentos')->insert([
+            'nombre' => 'Departamento de Ingeniería en Materiales',
+        ]);
+        DB::table('departamentos')->insert([
+            'nombre' => 'Departamento de Ingeniería Mécanica',
+        ]);
+        DB::table('departamentos')->insert([
+            'nombre' => 'Departamento de Ingeniería en Mecatrónica',
+        ]);
+        DB::table('departamentos')->insert([
+            'nombre' => 'Departamento de Ingeniería en Tecnologías en la Información y Comunicaciones',
+        ]);
+        DB::table('departamentos')->insert([
+            'nombre' => 'Departamento de Contador Público',
+        ]);
+        
 
        
     }
