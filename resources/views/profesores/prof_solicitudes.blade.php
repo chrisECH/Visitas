@@ -20,7 +20,7 @@
                     <tbody>
                         @foreach ($solicituds as $solicitud)
                             
-                    
+                        
                         <tr>
                             <th scope="row">{{$solicitud->folio}}</th>
                             <th scope="row">{{$solicitud->empresa}}</th>
@@ -46,17 +46,16 @@
                             @endswitch
                             </th>
                             <td>
-                                @if($solicitud->autorizacion == 3 || $solicitud->autorizacion == 0 || $solicitud->autorizacion == 1)
+                                @if($solicitud->autorizacion == 0 || $solicitud->autorizacion == 1 || $solicitud->autorizacion == 3)
                                    
                                     @else
                                     <a href="{{route('profe.editar_solicitud',$solicitud->id)}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar">
                                         Editar
                                     </a>
+                                    <a class="btn btn-danger" data-toggle="modal" data-placement="top" title="Borrar" data-target="#eliminarModal{{$solicitud->id}}">
+                                        Cancelar
+                                    </a>
                                 @endif
-                                <a class="btn btn-danger" data-toggle="modal" data-placement="top" title="Borrar" data-target="#eliminarModal{{$solicitud->id}}">
-                                    Cancelar
-                                </a>
-
                                 <!-- Modal -->
                                 <div class="modal fade" id="eliminarModal{{$solicitud->id}}" data-backdrop="static" data-keyboard="false" tabindex="-1"" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
