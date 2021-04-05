@@ -35,9 +35,6 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('usuario.logout')
 Route::get('/admin',[AdminController::class, 'indexAdmin'])->middleware('checkadmin')->name('admin.index');
 
 
-Route::get('/subdirector',[AdminController::class, 'indexSubdirector'])->middleware('checksubdirector')->name('sub.index');
-
-
 Route::get('/admin/perfil/{id}',[UserController::class, 'show'])->middleware('checkadmin')->name('admin.perfil');
 Route::post('/admin/perfil/',[UserController::class, 'actFoto'])->middleware('checkadmin')->name('admin.foto_perfil');
 
@@ -102,3 +99,12 @@ Route::get('/jefeDepto',[AdminController::class, 'indexJefeDepto'])->middleware(
 Route::get('/jefeDepto/perfil/{id}', [UserController::class, 'showJefeDepto'])->middleware('checkjefedepto')->name('jDepto.perfil');
 Route::get('/jefeDepto/solicitudes',[SolicitudController::class, 'solicitudesJefeDepto'])->middleware('checkjefedepto')->name('jDepto.solicitudes');
 Route::post('/jefeDepto',[SolicitudController::class, 'completarSolicitud'])->middleware('checkjefedepto')->name('jDepto.completarSolicitud');
+
+
+
+
+//Rutas para el subdirector
+Route::get('/subdirector',[AdminController::class, 'indexSubdirector'])->middleware('checksubdirector')->name('sub.index');
+Route::get('/subdirector/perfil/{id}', [UserController::class, 'showSubdirector'])->middleware('checksubdirector')->name('sub.perfil');
+Route::get('/subdirector/solicitudes',[SolicitudController::class, 'solicitudesSub'])->middleware('checksubdirector')->name('sub.solicitudes');
+Route::post('/subdirector',[SolicitudController::class, 'autorizarSolicitud'])->middleware('checksubdirector')->name('sub.autorizarSolicitud');

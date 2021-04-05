@@ -505,4 +505,48 @@ class SolicitudController extends Controller
             return redirect()->action([SolicitudController::class,'solicitudesJefeDepto']);
         }
     }
+
+    //Funciones para el subdirector
+    public function solicitudesSub(){
+        $solicitudes = DB::table('solicituds')
+        ->join('users','solicituds.user_id','=','users.id')
+        ->join('info_instancias', 'solicituds.id', '=', 'info_instancias.solicitud_id')
+        ->join('info_docentes', 'solicituds.id', '=', 'info_docentes.solicitud_id')
+        ->join('info_academicas','info_academicas.solicitud_id','=','solicituds.id')
+        ->where('solicituds.tipoVisita','!=',null)
+        ->where('solicituds.autorizacion',2)
+        ->get();
+
+        
+        
+        return view('subdirector.sub_solicitudes', ['solicitudes' => $solicitudes]);
+    }
+
+    public function autorizarSolicitud(Request $request){
+        $request->validate([
+            'observaciones'     =>  'Nullable | string'
+        ]);
+        switch ($request->tipoSolicitud){
+            case 1: 
+                DB::table('solicituds')
+                ->where('id',$request->idSolicitud)
+                ->update([
+                    'autorizacion'      => 1,
+                    'observaciones'     => $request->observaciones
+                ]);
+                return redirect()->action([SolicitudController::class,'solicitudesSub']);
+                break;
+            case 2:
+                DB::table('solicituds')
+                ->where('id',$request->idSolicitud)
+                ->update([
+                    'autorizacion'      => 0,
+                    'observaciones'     => $request->observaciones
+                ]);
+                return redirect()->action([SolicitudController::class,'solicitudesSub']);
+                break; 
+            default:
+            return redirect()->action([SolicitudController::class,'solicitudesSub']);
+        }
+    }
 }

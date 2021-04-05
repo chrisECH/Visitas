@@ -29,8 +29,8 @@
             </div>
             <div class="menu">
                 <a href="{{route('sub.index')}}" class="d-block text-light p-3"><i class="icon ion-md-home mr-2 lead"></i>Inicio</a>
-                <a href="" class="d-block text-light p-3"><i class="icon ion-md-contact mr-2 lead"></i>Pefil</a>
-                <a href="" class="d-block text-light p-3"><i class="icon ion-md-document mr-2 lead"></i>Ver solicitudes</a>
+                <a href="{{route('sub.perfil',Auth::user()->id)}}" class="d-block text-light p-3"><i class="icon ion-md-contact mr-2 lead"></i>Pefil</a>
+                <a href="{{route('sub.solicitudes')}}" class="d-block text-light p-3"><i class="icon ion-md-document mr-2 lead"></i>Ver solicitudes</a>
                 <a href="" class="d-block text-light p-3"><i class="icon ion-md-settings mr-2 lead"></i>Configuración</a>
                 <a href="{{route('user.logout')}}" class="d-block text-light p-3"><i class="icon ion-md-arrow-back mr-2 lead"></i>Cerrar sesiòn</a>
             </div>

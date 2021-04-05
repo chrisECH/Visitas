@@ -146,6 +146,20 @@ class UserController extends Controller
         return view('jefeDepto.jefe_perfil', ['users' => $users]);
     }
 
+    public function showSubdirector(){
+        $usuario = Auth::user();
+
+
+        $users = DB::table('users')
+            ->join('departamentos', 'users.departamento_id', '=', 'departamentos.id')
+            ->join('rols', 'users.rol_id', '=', 'rols.id')
+            ->where('users.id',$usuario->id)
+            ->select('users.*', 'departamentos.nombre as deptoNombre', 'rols.nombre as rolNombre')
+            ->get();
+
+        return view('subdirector.sub_perfil', ['users' => $users]);
+    }
+
    
 
 
