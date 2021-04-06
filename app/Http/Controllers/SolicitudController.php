@@ -549,4 +549,72 @@ class SolicitudController extends Controller
             return redirect()->action([SolicitudController::class,'solicitudesSub']);
         }
     }
+
+
+    //Funciones para descargar solicitud
+    public function descargarSolicitud(Solicitud $solicitud, $id){
+        $solicitudes = $solicitud::find($id);
+        
+       
+        try{
+            $template = new \PhpOffice\PhpWord\TemplateProcessor('Formato-visitas.docx');
+            $template->setValue('folio',$solicitudes->folio);
+
+            
+            $template->setValue('asignatura1',$solicitudes->InfoAcademica->asignatura1);
+            $template->setValue('s1',$solicitudes->InfoAcademica->semestre1);
+            $template->setValue('n1',$solicitudes->InfoAcademica->numAlumnos1);
+            $template->setValue('asignatura2',$solicitudes->InfoAcademica->asignatura2);
+            $template->setValue('s2',$solicitudes->InfoAcademica->semestre2);
+            $template->setValue('n2',$solicitudes->InfoAcademica->numAlumnos2);
+            $template->setValue('objetivo',$solicitudes->InfoAcademica->objetivo);
+
+            $template->setValue('docenteRes',$solicitudes->InfoDocente->docentePrincipal);
+            $template->setValue('emailRes',$solicitudes->InfoDocente->emailPrincipal);
+            $template->setValue('telRes',$solicitudes->InfoDocente->telefonoPrincipal);
+            $template->setValue('docenteAcom',$solicitudes->InfoDocente->docenteAcom);
+            $template->setValue('emailAcom',$solicitudes->InfoDocente->emailAcom);
+            $template->setValue('telAcom',$solicitudes->InfoDocente->telAcom);
+            $template->setValue('docenteSupl',$solicitudes->InfoDocente->docenteSuplente);
+            $template->setValue('emailSupl',$solicitudes->InfoDocente->emailSuplente);
+            $template->setValue('telSupl',$solicitudes->InfoDocente->telefonoSuplente);
+
+
+            $template->setValue('fechaSug',$solicitudes->InfoInstancia->fecha);
+
+            $template->setValue('instancia',$solicitudes->InfoInstancia->instancia);
+            $template->setValue('domicilio',$solicitudes->InfoInstancia->domicilio);
+            $template->setValue('contacto',$solicitudes->InfoInstancia->contacto);
+            $template->setValue('telContacto',$solicitudes->InfoInstancia->telefono);
+            $template->setValue('entidad',$solicitudes->InfoInstancia->entidad);
+            $template->setValue('puesto',$solicitudes->InfoInstancia->puesto);
+            $template->setValue('email',$solicitudes->InfoInstancia->correo);
+            $template->setValue('instanciaSust',$solicitudes->InfoInstancia->instanciaSustituta);
+            $template->setValue('domicilioSust',$solicitudes->InfoInstancia->domicilioSustituta);
+            $template->setValue('contactoSust',$solicitudes->InfoInstancia->contactoSustituta);
+            $template->setValue('telSust',$solicitudes->InfoInstancia->telefonoSustituta);
+            $template->setValue('entidadSust',$solicitudes->InfoInstancia->entidadSustituta);
+            $template->setValue('puestoSust',$solicitudes->InfoInstancia->puestoSustituta);
+            $template->setValue('emailSust',$solicitudes->InfoInstancia->correoSustituta);
+
+            $template->setValue('tipoViaje',$solicitudes->tipoVisita);
+
+            if($solicitudes->autorizacion == 1) $template->setValue('autorizacion', 'Si');
+            else $template->setValue('autorizacion', 'No');
+
+            $template->setValue('observaciones',$solicitudes->observaciones);
+
+
+            $tempFile = tempnam(sys_get_temp_dir(), 'PHPWord');
+            $template->saveAs($tempFile);
+
+            $headers = [
+                "Content-Type: application/octet-stream",
+            ];
+
+            return response()->download($tempFile, $solicitudes->folio.'.docx', $headers)->deleteFileAfterSend(true);
+        }catch(\PhpOffice\PhpWord\Exception\Exception $e){
+            return back($e->getCode());
+        }
+    }
 }

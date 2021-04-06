@@ -56,6 +56,11 @@
                                         Cancelar
                                     </a>
                                 @endif
+                                @if($solicitud->autorizacion == 1)
+                                <a href="{{route('profe.descarga_solicitud',$solicitud->id)}}" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Descargar Solicitud">
+                                    <i class="fas fa-file-download"></i>
+                                </a>
+                                @endif
                                 <!-- Modal -->
                                 <div class="modal fade" id="eliminarModal{{$solicitud->id}}" data-backdrop="static" data-keyboard="false" tabindex="-1"" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">

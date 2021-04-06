@@ -93,6 +93,8 @@ Route::post('/profesor', [SolicitudController::class, 'store'])->middleware('che
 Route::delete('/cancelar_solicitud/{id}',[SolicitudController::class, 'destroy'])->middleware('checkprof')->name('profe.cancelar_solicitud');
 Route::post('/profesor/solicitudes',[SolicitudController::class, 'update'])->middleware('checkprof')->name('profe.actualizar_solicitud');
 
+Route::get('/profesor/solicitudes/descargar/{id}',[SolicitudController::class, 'descargarSolicitud'])->middleware('checkprof')->name('profe.descarga_solicitud');
+
 
 //Rutas para los jefes de departamentos
 Route::get('/jefeDepto',[AdminController::class, 'indexJefeDepto'])->middleware('checkjefedepto')->name('jDepto.index');
