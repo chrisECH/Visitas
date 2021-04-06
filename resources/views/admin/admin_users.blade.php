@@ -71,7 +71,7 @@
                                             </div>
                                             <div class="modal-body">
                                             ¿Seguro que quieres eliminar a <span> {{ $user->nombre}}? </span>
-                                            <span class="warning-user">Nota: al eliminar el usuario se eliminaran las solicitudes que haya realizado.</span>
+                                            <span class="warning-user">Nota: al eliminar el usuario no se eliminaran las solicitudes que haya realizado.</span>
                                             </div>
                                             <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
