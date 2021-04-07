@@ -79,6 +79,9 @@ Route::post('/admin/carreras', [CarreraController::class, 'update'])->middleware
 Route::delete('/admin/carreras/{id}', [CarreraController::class, 'destroy'])->middleware('checkadmin')->name('carrera.eliminar');
 
 
+Route::get('/admin/solicitudes/descargar_formato/{id}',[SolicitudController::class, 'descargarFormato'])->middleware('checkadmin')->name('admin.descargar_formato');
+Route::get('/admin/solicitudes/descargar_solicitud/{id}',[SolicitudController::class, 'descargarSolicitud'])->middleware('checkadmin')->name('admin.descargar_solicitud');
+
 //Rutas para los profesores
 Route::get('/profesor',[AdminController::class, 'indexProfesor'])->middleware('checkprof')->name('profe.index');
 Route::get('/profesor/perfil/{id}', [UserController::class, 'showProfesor'])->middleware('checkprof')->name('profe.perfil');
@@ -93,7 +96,8 @@ Route::post('/profesor', [SolicitudController::class, 'store'])->middleware('che
 Route::delete('/cancelar_solicitud/{id}',[SolicitudController::class, 'destroy'])->middleware('checkprof')->name('profe.cancelar_solicitud');
 Route::post('/profesor/solicitudes',[SolicitudController::class, 'update'])->middleware('checkprof')->name('profe.actualizar_solicitud');
 
-Route::get('/profesor/solicitudes/descargar/{id}',[SolicitudController::class, 'descargarSolicitud'])->middleware('checkprof')->name('profe.descarga_solicitud');
+Route::get('/profesor/solicitudes/descargar_formato/{id}',[SolicitudController::class, 'descargarFormato'])->middleware('checkprof')->name('profe.descargar_formato');
+Route::get('/profesor/solicitudes/descargar_solicitud/{id}',[SolicitudController::class, 'descargarSolicitud'])->middleware('checkprof')->name('profe.descargar_solicitud');
 
 
 //Rutas para los jefes de departamentos

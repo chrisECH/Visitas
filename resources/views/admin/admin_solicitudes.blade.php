@@ -51,7 +51,10 @@
                                 <a href="" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Cancelar">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
-                                <a href="" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Descargar">
+                                <a href="{{route('admin.descargar_formato',$solicitud->id)}}" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Descargar Formato">
+                                    <i class="fas fa-file-download"></i>
+                                </a>
+                                <a href="{{route('admin.descargar_solicitud',$solicitud->id)}}" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Descargar Solicitud">
                                     <i class="fas fa-file-download"></i>
                                 </a>
                             </td>

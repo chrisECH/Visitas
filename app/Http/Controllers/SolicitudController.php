@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
+
+use Carbon\Carbon;
+
 class SolicitudController extends Controller
 {
     /**
@@ -151,7 +154,8 @@ class SolicitudController extends Controller
             'numAlumnos2'       => $request->numAlumnos2,
             'totalAlumnos'      => $request->totalAlumn,
             'objetivo'          => $request->objetivo,
-            'solicitud_id'      => $solicitudId->id
+            'solicitud_id'      => $solicitudId->id,
+            'carrera_id'        => $request->carrera
         ]);
 
         DB::table('info_docentes')->insert([
@@ -552,9 +556,8 @@ class SolicitudController extends Controller
 
 
     //Funciones para descargar solicitud
-    public function descargarSolicitud(Solicitud $solicitud, $id){
+    public function descargarFormato(Solicitud $solicitud, $id){
         $solicitudes = $solicitud::find($id);
-        
        
         try{
             $template = new \PhpOffice\PhpWord\TemplateProcessor('Formato-visitas.docx');
@@ -612,7 +615,56 @@ class SolicitudController extends Controller
                 "Content-Type: application/octet-stream",
             ];
 
-            return response()->download($tempFile, $solicitudes->folio.'.docx', $headers)->deleteFileAfterSend(true);
+            return response()->download($tempFile,'Formato-'.$solicitudes->folio.'.docx', $headers)->deleteFileAfterSend(true);
+        }catch(\PhpOffice\PhpWord\Exception\Exception $e){
+            return back($e->getCode());
+        }
+    }
+
+    public function descargarSolicitud(Solicitud $solicitud, $id){
+        $solicitudes = $solicitud::find($id);
+        $carreraNombre = Carrera::find($solicitudes->InfoAcademica->carrera_id)->carrera;
+        
+        try{
+            $template = new \PhpOffice\PhpWord\TemplateProcessor('Solicitud-visitas.docx');
+            
+            Carbon::setLocale('es');
+            setlocale(LC_TIME, 'es_ES.utf8');
+            $template->setValue('fechaHoy', Carbon::now()->locale('es')->translatedFormat('d \d\e F \d\e\l Y'));
+            $template->setValue('oficio', $solicitudes->folio);
+
+            $template->setValue('encargado', $solicitudes->InfoInstancia->contacto);
+            $template->setValue('puesto', $solicitudes->InfoInstancia->puesto);
+            $template->setValue('entidad', $solicitudes->InfoInstancia->instancia);
+
+            $template->setValue('objetivo', $solicitudes->InfoAcademica->objetivo);
+            $template->setValue('carrera', $carreraNombre);
+            if(is_null($solicitudes->InfoAcademica->asignatura2)) {
+                $template->setValue('asignaturas', $solicitudes->InfoAcademica->asignatura1);
+                $template->setValue('semestres', $solicitudes->InfoAcademica->semestre1);
+            }
+            else {
+                $template->setValue('asignaturas', $solicitudes->InfoAcademica->asignatura1.' y '.$solicitudes->InfoAcademica->asignatura2);
+                $template->setValue('semestres', $solicitudes->InfoAcademica->semestre1.' y '.$solicitudes->InfoAcademica->semestre2);
+
+            }
+            
+
+            $template->setValue('totalAlumnos', $solicitudes->InfoAcademica->totalAlumnos);
+            $template->setValue('docentePrincipal', $solicitudes->InfoDocente->docentePrincipal);
+            $template->setValue('docenteAcom', $solicitudes->InfoDocente->docenteAcom);
+            $template->setValue('fechaVisita', $solicitudes->InfoInstancia->fecha);
+            $template->setValue('Observaciones', $solicitudes->observaciones);
+
+
+
+            $tempFile = tempnam(sys_get_temp_dir(), 'PHPWord');
+            $template->saveAs($tempFile);
+
+            $headers = [
+                "Content-Type: application/octet-stream",
+            ];
+            return response()->download($tempFile,'Solicitud-'.$solicitudes->folio.'.docx', $headers)->deleteFileAfterSend(true);
         }catch(\PhpOffice\PhpWord\Exception\Exception $e){
             return back($e->getCode());
         }
