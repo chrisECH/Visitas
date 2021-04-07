@@ -24,11 +24,17 @@ class CreateInfoAcademicasTable extends Migration
             $table->integer('totalAlumnos');
             $table->text('objetivo');
             $table->foreignId('solicitud_id');
+            $table->foreignId('carrera_id');
 
             $table->foreign('solicitud_id')
                 ->references('id')->on('solicituds')
                 ->onUpdate('cascade')
                 ->onUpdate('cascade');
+            
+            $table->foreign('carrera_id')
+                ->references('id')->on('carreras')
+                ->onUpdate('cascade')
+                ->onDelete('no action');
             
 
 

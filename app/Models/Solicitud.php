@@ -26,4 +26,8 @@ class Solicitud extends Model
     public function infoInstancia(){
         return $this -> hasOne(InfoInstancia::class);
     }
+
+    public function carrera(){
+        return $this -> hasOne(Carrera::class);
+    }
 }
