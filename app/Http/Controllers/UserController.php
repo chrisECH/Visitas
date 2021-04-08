@@ -118,6 +118,21 @@ class UserController extends Controller
             return view('admin.admin_perfil', ['users' => $users]);
     }
 
+    public function showUser(User $user,$id)
+    {
+        $usuario = $user::find($id);
+        $userId = $usuario->id;
+
+        $users = DB::table('users')
+            ->join('departamentos', 'users.departamento_id', '=', 'departamentos.id')
+            ->join('rols', 'users.rol_id', '=', 'rols.id')
+            ->where('users.id',$userId)
+            ->select('users.*', 'departamentos.nombre as deptoNombre', 'rols.nombre as rolNombre')
+            ->get();
+            
+            return view('admin.admin_perfil-usuario', ['users' => $users]);
+    }
+
     public function showProfesor(User $user,$id){
         $usuario = $user::find($id);
         $userId = $usuario->id;
@@ -188,21 +203,41 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $user = $user::find($request->id);
-        $userId = $user->id;
-        $nombreAnterior = DB::table('users')
-                            ->where('id',$userId)
-                            ->value('nombre');
+        $request->validate([
+            'nombre'            =>     'required|min:2!max:100',
+            'apellidop'         =>     'required|alpha|min:2!max:100',
+            'apellidom'         =>     'required|alpha|min:2!max:100',
+            'telefono'          =>     'required|numeric',
+        ]);
+        
+        DB::table('users')
+            ->where('id',$request->id)
+            ->update([
+                'nombre'        =>      $request->nombre,
+                'apellidop'     =>      $request->apellidop,
+                'apellidom'     =>      $request->apellidom,
+                'telefono'      =>      $request->telefono,
+                'departamento_id'   =>  $request->depto,
+                'rol_id'        =>      $request->rol
+            ]);
+        
+        return redirect()->action([UserController::class, 'index']);
+    }
 
-        $apellpAnterior =  DB::table('users')
-                            ->where('id',$userId)
-                            ->value('apellidop');
+    public function updateMail(Request $request, User $user){
+        $request->validate([
+            'correo'              =>     'required|unique:users,email',
+        ], [
+            'correo.required'     =>      'El campo correo es obligatorio.',
+        ]);
 
-        $apellmAnterior =  DB::table('users')
-                            ->where('id',$userId)
-                            ->value('apellidom');
-                            
-        dd($nombreAnterior,$apellpAnterior,$apellmAnterior);
+        DB::table('users')
+            ->where('id',$request->id)
+            ->update([
+                'email'         =>      $request->correo
+            ]);
+
+        return redirect()->action([UserController::class, 'index']);
     }
 
     /**

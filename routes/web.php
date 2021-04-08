@@ -49,10 +49,12 @@ Route::post('/admin/solicitudes',[SolicitudController::class, 'update'])->middle
 
 Route::get('/admin/usuarios',[UserController::class,'index'])->middleware('checkadmin')->name('usuarios.index');
 Route::get('/admin/usuarios/registrar',[UserController::class, 'create'])->middleware('checkadmin')->name('usuarios.crear');
+Route::get('/admin/ver_usuario/{id}',[UserController::class, 'showUser'])->middleware('checkadmin')->name('admin.verUsuario');
 //Consultas a la BD para los usuarios.
 Route::post('/admin/usuarios/registrar',[UserController::class, 'store'])->middleware('checkadmin')->name('usuarios.store');
 Route::get('/admin/usuarios/editar/{id}',[UserController::class, 'edit'])->middleware('checkadmin')->name('usuarios.editar');
 Route::post('/actualizar_usuario',[UserController::class, 'update'])->middleware('checkadmin')->name('usuarios.update');
+Route::post('/actualizar_mail',[UserController::class, 'updateMail'])->middleware('checkadmin')->name('usuarios.updateMail');
 Route::delete('/eliminar_usuario/{id}',[UserController::class, 'destroy'])->middleware('checkadmin')->name('usuarios.eliminar');
 Route::post('/admin/usuarios',[UserController::class, 'busqueda'])->middleware('checkadmin')->name('usuarios.busqueda');
 

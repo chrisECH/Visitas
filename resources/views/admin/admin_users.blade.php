@@ -50,13 +50,13 @@
                             <th scope="row">{{$user->deptoNombre}}</th>
                             <th scope="row">{{$user->rolNombre}}</th>
                             <td>
-                                <a href="#" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Ver perfil">
+                                <a href="{{route('admin.verUsuario',$user->id)}}" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Ver perfil">
                                     <i class="fas fa-eye"></i>
                                 </a>
                                 <a href="{{route('usuarios.editar',$user->id)}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="#" class="btn btn-danger" data-toggle="modal" data-placement="top" title="Borrar" data-target="#eliminarModal{{$user->id}}">
+                                <a href="" class="btn btn-danger" data-toggle="modal" data-placement="top" title="Borrar" data-target="#eliminarModal{{$user->id}}">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
 
