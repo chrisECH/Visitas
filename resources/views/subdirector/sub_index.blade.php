@@ -8,7 +8,7 @@
         <div class="container centrar">
             <div class="card">
                 <div class="card-header header">
-                  <h4>Bienvenido de nuevo {{Auth::user()->nombre}}</h4>
+                  <h4>Bienvenido de nuevo {{Auth::user()->nombre}} {{Auth::user()->apellidop}} {{Auth::user()->apellidom}}</h4>
                   <h6>Iniciaste sesion como subdirector.</h6>
                 </div>
                 <div class="card-body">

@@ -54,9 +54,9 @@
                             {{auth()->user()->nombre}}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Inicio</a>
-                                <a class="dropdown-item" href="#">Perfil</a>
-                                <a class="dropdown-item" href="#">Ver solicitudes</a>
+                                <a class="dropdown-item" href="{{route('sub.index')}}">Inicio</a>
+                                <a class="dropdown-item" href="{{route('sub.perfil',Auth::user()->id)}}">Perfil</a>
+                                <a class="dropdown-item" href="{{route('sub.solicitudes')}}">Ver solicitudes</a>
                                 <a class="dropdown-item" href="#">Configuracion</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{route('user.logout')}}">Cerrar sesión</a>
