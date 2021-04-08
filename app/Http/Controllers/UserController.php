@@ -240,10 +240,10 @@ class UserController extends Controller
 
     public function busqueda(Request $request){
         $users = DB::table('users')
-            ->join('departamentos', 'users.depto_id', '=', 'departamentos.id')
+            ->join('departamentos', 'users.departamento_id', '=', 'departamentos.id')
             ->join('rols', 'users.rol_id', '=', 'rols.id')
             ->select('users.*', 'departamentos.nombre as deptoNombre', 'rols.nombre as rolNombre')
-            ->where([['users.nombre','like','%'.$request->busqueda.'%'],['depto_id',$request->depto]])
+            ->where([['users.nombre','like','%'.$request->busqueda.'%'],['departamento_id',$request->depto]])
             ->paginate(5);
             
             $deptos = Departamento::all();

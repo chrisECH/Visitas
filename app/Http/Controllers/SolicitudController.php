@@ -260,7 +260,17 @@ class SolicitudController extends Controller
             )
             ->get();
 
-        return view('profesores.prof_editar-solicitud', ['solicituds' => $solicituds]);
+        
+            switch(Auth::user()->rol_id){
+                case 1: 
+                    return view('admin.admin_editar-solicitud', ['solicituds' => $solicituds]);
+                    break;
+                case 4:
+                    return view('profesores.prof_editar-solicitud', ['solicituds' => $solicituds]);
+                    break;
+            }
+
+        
     }
 
     /**
@@ -358,9 +368,7 @@ class SolicitudController extends Controller
         ->join('solicituds','info_docentes.solicitud_id','=','solicituds.id')
         ->where('solicituds.id',$solicitud->id)
         ->update([
-            'docentePrincipal'    => Auth::user()->nombre . " " . Auth::user()->apellidop . " " . Auth::user()->apellidom,
-            'emailPrincipal'      => Auth::user()->email,
-            'telefonoPrincipal'   => Auth::user()->telefono,
+            
             'docenteAcom'         => $request->docenteAcom,
             'emailAcom'           => $request->emailAcom,
             'telefonoAcom'        => $request->telefonoAcom,
@@ -391,8 +399,17 @@ class SolicitudController extends Controller
             'correoSustituta'       => $request->emailContactoSust
         ]);
 
-        return redirect()->action([SolicitudController::class, 'show']);
-        
+        switch (Auth::user()->rol_id){
+            case 1:
+                return redirect()->action([SolicitudController::class, 'allSolicitud']);
+                break;
+            case 4: 
+                return redirect()->action([SolicitudController::class, 'show']);
+                break;
+            
+            default:
+                return redirect()->action([SolicitudController::class, 'show']);
+        }
     }
 
     /**
@@ -410,8 +427,19 @@ class SolicitudController extends Controller
             ->update([
                 'autorizacion' => 3
             ]);
-
-        return redirect()->action([SolicitudController::class, 'show']);
+        
+        switch (Auth::user()->rol_id){
+            case 1:
+                return redirect()->action([SolicitudController::class, 'allSolicitud']);
+                break;
+            case 4: 
+                return redirect()->action([SolicitudController::class, 'show']);
+                break;
+            
+            default:
+                return redirect()->action([SolicitudController::class, 'show']);
+        }
+        
     }
 
 
@@ -434,10 +462,32 @@ class SolicitudController extends Controller
                 'info_docentes.emailPrincipal as email'
             )
             ->get();
-
-
         return view('admin.admin_solicitudes', ['solicitudes' => $solicitudes]);
     }
+
+    public function activarSolicitud(Solicitud $solicitud, $id){
+        $solicitud = $solicitud::find($id);
+
+        DB::table('solicituds')
+            ->where('id', '=', $solicitud->id)
+            ->update([
+                'autorizacion' => 2
+            ]);
+        
+        switch (Auth::user()->rol_id){
+            case 1:
+                return redirect()->action([SolicitudController::class, 'allSolicitud']);
+                break;
+            case 4: 
+                return redirect()->action([SolicitudController::class, 'show']);
+                break;
+            
+            default:
+                return redirect()->action([SolicitudController::class, 'show']);
+        }
+    }
+
+    
 
 
     //Funciones para el jefe de departamento
@@ -654,6 +704,7 @@ class SolicitudController extends Controller
             $template->setValue('docentePrincipal', $solicitudes->InfoDocente->docentePrincipal);
             $template->setValue('docenteAcom', $solicitudes->InfoDocente->docenteAcom);
             $template->setValue('fechaVisita', $solicitudes->InfoInstancia->fecha);
+            $template->setValue('horario', $solicitudes->InfoInstancia->hora);
             $template->setValue('Observaciones', $solicitudes->observaciones);
 
 

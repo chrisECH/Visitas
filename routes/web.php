@@ -40,6 +40,11 @@ Route::post('/admin/perfil/',[UserController::class, 'actFoto'])->middleware('ch
 
 
 Route::get('/admin/solicitudes',[SolicitudController::class, 'allSolicitud'])->middleware('checkadmin')->name('admin.solicitudes');
+Route::delete('/admin/cancelar_solicitud/{id}',[SolicitudController::class, 'destroy'])->middleware('checkadmin')->name('admin.cancelar_solicitud');
+Route::post('/admin/activar_solicitud/{id}',[SolicitudController::class, 'activarSolicitud'])->middleware('checkadmin')->name('admin.activar_solicitud');
+Route::get('/admin/editar_solicitud/{id}',[SolicitudController::class, 'edit'])->middleware('checkadmin')->name('admin.showSolicitud');
+Route::post('/admin/solicitudes',[SolicitudController::class, 'update'])->middleware('checkadmin')->name('admin.actualizar_solicitud');
+
 
 
 Route::get('/admin/usuarios',[UserController::class,'index'])->middleware('checkadmin')->name('usuarios.index');
