@@ -34,7 +34,7 @@
                 <a href="{{route('profe.crear_solicitud')}}" class="d-block text-light p-3"><i class="icon ion-md-document mr-2 lead"></i>Crear Solicitud</a>
                 <a href="{{route('profe.status_solicitud')}}" class="d-block text-light p-3"><i class="icon ion-md-document mr-2 lead"></i>Consultar estado de solicitudes</a>
                 <a href="{{route('profe.solicitudes')}}" class="d-block text-light p-3"><i class="icon ion-md-document mr-2 lead"></i>Ver solicitudes creadas</a>
-                <a href="" class="d-block text-light p-3"><i class="icon ion-md-settings mr-2 lead"></i>Configuración</a>
+                <a href="{{route('profe.editarPerfil',Auth::user()->id)}}" class="d-block text-light p-3"><i class="icon ion-md-settings mr-2 lead"></i>Editar perfil</a>
                 <a href="{{route('usuario.logout')}}" class="d-block text-light p-3"><i class="icon ion-md-arrow-back mr-2 lead"></i>Cerrar sesiòn</a>
             </div>
         </div>

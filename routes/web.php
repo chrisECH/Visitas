@@ -33,6 +33,8 @@ Route::post('/', [AuthController::class, 'login'])->name('login.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('user.logout');
 Route::get('/logout', [AuthController::class, 'logout'])->name('usuario.logout');
 
+Route::post('/actualizar_datos',[UserController::class, 'updatePassword'])->middleware('session')->name('actualizarContraseña');
+Route::post('/actualizar_password',[UserController::class, 'updateInfo'])->middleware('session')->name('actualizarInfo');
 
 //Rutas pora el administraor
 Route::get('/admin',[AdminController::class, 'indexAdmin'])->middleware('checkadmin')->name('admin.index');
@@ -40,7 +42,7 @@ Route::get('/admin',[AdminController::class, 'indexAdmin'])->middleware('checkad
 //Administrador: perfil
 Route::get('/admin/perfil/{id}',[UserController::class, 'show'])->middleware('checkadmin')->name('admin.perfil');
 Route::post('/admin/perfil/',[UserController::class, 'actFoto'])->middleware('checkadmin')->name('admin.foto_perfil');
-
+Route::get('/admin/editar_perfil/{id}',[UserController::class, 'edit'])->middleware('checkadmin')->name('admin.editarPerfil');
 //Administrador: solicitudes
 Route::get('/admin/solicitudes',[SolicitudController::class, 'allSolicitud'])->middleware('checkadmin')->name('admin.solicitudes');
 Route::get('/admin/editar_solicitud/{id}',[SolicitudController::class, 'edit'])->middleware('checkadmin')->name('admin.showSolicitud');
@@ -59,7 +61,7 @@ Route::get('/admin/usuarios/registrar',[UserController::class, 'create'])->middl
 Route::get('/admin/ver_usuario/{id}',[UserController::class, 'showUser'])->middleware('checkadmin')->name('admin.verUsuario');
 //Consultas a la BD para los usuarios.
 Route::post('/admin/usuarios/registrar',[UserController::class, 'store'])->middleware('checkadmin')->name('usuarios.store');
-Route::get('/admin/usuarios/editar/{id}',[UserController::class, 'edit'])->middleware('checkadmin')->name('usuarios.editar');
+Route::get('/admin/usuarios/editar/{id}',[UserController::class, 'editUsers'])->middleware('checkadmin')->name('usuarios.editar');
 Route::post('/actualizar_usuario',[UserController::class, 'update'])->middleware('checkadmin')->name('usuarios.update');
 Route::post('/actualizar_mail',[UserController::class, 'updateMail'])->middleware('checkadmin')->name('usuarios.updateMail');
 Route::delete('/eliminar_usuario/{id}',[UserController::class, 'destroy'])->middleware('checkadmin')->name('usuarios.eliminar');
@@ -102,7 +104,7 @@ Route::delete('/admin/carreras/{id}', [CarreraController::class, 'destroy'])->mi
 //Profesor: global
 Route::get('/profesor',[AdminController::class, 'indexProfesor'])->middleware('checkprof')->name('profe.index');
 Route::get('/profesor/perfil/{id}', [UserController::class, 'showProfesor'])->middleware('checkprof')->name('profe.perfil');
-
+Route::get('/profesor/editar_perfil/{id}',[UserController::class, 'edit'])->middleware('checkprof')->name('profe.editarPerfil');
 //Profesor: solicitudes
 Route::get('/profesor/crear_solicitud',[SolicitudController::class, 'create'])->middleware('checkprof')->name('profe.crear_solicitud');
 Route::get('/profesor/solicitudes', [SolicitudController::class, 'show'])->middleware('checkprof')->name('profe.solicitudes');
@@ -121,10 +123,11 @@ Route::post('/profesor/solicitudes',[SolicitudController::class, 'update'])->mid
 //jefeDepto: global
 Route::get('/jefeDepto',[AdminController::class, 'indexJefeDepto'])->middleware('checkjefedepto')->name('jDepto.index');
 Route::get('/jefeDepto/perfil/{id}', [UserController::class, 'showJefeDepto'])->middleware('checkjefedepto')->name('jDepto.perfil');
-
+Route::get('/jefeDepto/editar_perfil/{id}',[UserController::class, 'edit'])->middleware('checkjefedepto')->name('jDepto.editarPerfil');
 //jefeDepto: solicitudes
 Route::get('/jefeDepto/solicitudes',[SolicitudController::class, 'solicitudesJefeDepto'])->middleware('checkjefedepto')->name('jDepto.solicitudes');
 Route::post('/jefeDepto',[SolicitudController::class, 'completarSolicitud'])->middleware('checkjefedepto')->name('jDepto.completarSolicitud');
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -133,6 +136,7 @@ Route::post('/jefeDepto',[SolicitudController::class, 'completarSolicitud'])->mi
 //Subdirector: global
 Route::get('/subdirector',[AdminController::class, 'indexSubdirector'])->middleware('checksubdirector')->name('sub.index');
 Route::get('/subdirector/perfil/{id}', [UserController::class, 'showSubdirector'])->middleware('checksubdirector')->name('sub.perfil');
+Route::get('subdirector/editar_perfil/{id}', [UserController::class, 'edit'])->middleware('checksubdirector')->name('sub.editarPerfil');
 //Subdirector: solicitudes
 Route::get('/subdirector/solicitudes',[SolicitudController::class, 'solicitudesSub'])->middleware('checksubdirector')->name('sub.solicitudes');
 Route::post('/subdirector',[SolicitudController::class, 'autorizarSolicitud'])->middleware('checksubdirector')->name('sub.autorizarSolicitud');

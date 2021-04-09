@@ -37,7 +37,7 @@
                 <a href="{{route('rol.index')}}" class="d-block text-light p-3"><i class="icon ion-md-contacts mr-2 lead"></i>Administrar Roles</a>
                 <a href="{{route('depto.index')}}" class="d-block text-light p-3"><i class="icon ion-md-list mr-2 lead"></i>Administrar Departamentos</a>
                 <a href="{{route('carrera.index')}}" class="d-block text-light p-3"><i class="icon ion-md-school mr-2 lead"></i>Administrar Carreras</a>
-                <a href="" class="d-block text-light p-3"><i class="icon ion-md-settings mr-2 lead"></i>Configuración</a>
+                <a href="{{route('admin.editarPerfil',Auth::user()->id)}}" class="d-block text-light p-3"><i class="icon ion-md-settings mr-2 lead"></i>Editar perfil</a>
                 <a href="{{route('usuario.logout')}}" class="d-block text-light p-3"><i class="icon ion-md-arrow-back mr-2 lead"></i>Cerrar sesiòn</a>
             </div>
         </div>

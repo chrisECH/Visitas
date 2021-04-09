@@ -106,12 +106,12 @@ class UserController extends Controller
     public function show(User $user,$id)
     {
         $usuario = $user::find($id);
-        $userId = $usuario->id;
+        
 
         $users = DB::table('users')
             ->join('departamentos', 'users.departamento_id', '=', 'departamentos.id')
             ->join('rols', 'users.rol_id', '=', 'rols.id')
-            ->where('users.id',$userId)
+            ->where('users.id',$usuario->id)
             ->select('users.*', 'departamentos.nombre as deptoNombre', 'rols.nombre as rolNombre')
             ->get();
             
@@ -121,12 +121,12 @@ class UserController extends Controller
     public function showUser(User $user,$id)
     {
         $usuario = $user::find($id);
-        $userId = $usuario->id;
+       
 
         $users = DB::table('users')
             ->join('departamentos', 'users.departamento_id', '=', 'departamentos.id')
             ->join('rols', 'users.rol_id', '=', 'rols.id')
-            ->where('users.id',$userId)
+            ->where('users.id',$usuario->id)
             ->select('users.*', 'departamentos.nombre as deptoNombre', 'rols.nombre as rolNombre')
             ->get();
             
@@ -135,12 +135,12 @@ class UserController extends Controller
 
     public function showProfesor(User $user,$id){
         $usuario = $user::find($id);
-        $userId = $usuario->id;
+        
 
         $users = DB::table('users')
             ->join('departamentos', 'users.departamento_id', '=', 'departamentos.id')
             ->join('rols', 'users.rol_id', '=', 'rols.id')
-            ->where('users.id',$userId)
+            ->where('users.id',$usuario->id)
             ->select('users.*', 'departamentos.nombre as deptoNombre', 'rols.nombre as rolNombre')
             ->get();
             
@@ -148,7 +148,7 @@ class UserController extends Controller
     }
 
     public function showJefeDepto(User $user, $id) {
-        $usuario = Auth::user();
+        $usuario = $user::find($id);
 
 
         $users = DB::table('users')
@@ -191,7 +191,30 @@ class UserController extends Controller
         $depto = departamento::all();
         $user = $user::find($id);
         //dd($user);
-        return view('admin.edicion_user',['user'=>$user, 'rols'=>$rols, 'deptos'=>$depto]);
+        switch(Auth::user()->rol_id){
+            case 1:
+                return view('admin.admin_edicion_user', ['user'=>$user, 'rols'=>$rols, 'deptos'=>$depto]);
+                break;
+            case 2:
+                return view('subdirector.sub_edicion_user', ['user'=>$user, 'rols'=>$rols, 'deptos'=>$depto]);
+                break;
+            case 3:
+                return view('jefeDepto.jefe_edicion_user', ['user'=>$user, 'rols'=>$rols, 'deptos'=>$depto]);
+                break;
+            case 4:
+                return view('profesores.prof_edicion_user', ['user'=>$user, 'rols'=>$rols, 'deptos'=>$depto]);
+                break;
+            default:
+        }
+        
+    }
+
+    public function editUsers(User $user, $id){
+        $rols = rol::all();
+        $depto = departamento::all();
+        $user = $user::find($id);
+
+        return view('admin.edicion_user', ['user'=>$user, 'rols'=>$rols, 'deptos'=>$depto]);
     }
 
     /**
@@ -237,7 +260,75 @@ class UserController extends Controller
                 'email'         =>      $request->correo
             ]);
 
+            
         return redirect()->action([UserController::class, 'index']);
+    }
+
+    public function updatePassword(Request $request){
+        $request->validate([
+            'password'          =>     'required|alpha_num|min:6',
+            'password_check'    =>     'required|alpha_num|same:password',
+        ],[
+            'password_check.required' => 'Confirme la contraseña',
+            'password_check.same'     => 'Las contraseñas no coinciden'
+        ]);
+
+        DB::table('users')
+            ->where('id',Auth::user()->id)
+            ->update([
+                'password'   =>    Hash::make($request->password),  
+            ]);
+    
+            switch(Auth::user()->rol_id){
+                case 1:
+                    return redirect()->action([AdminController::class, 'indexAdmin']);
+                    break;
+                case 2:
+                    return redirect()->action([AdminController::class, 'indexSubdirector']);
+                    break;
+                case 3:
+                    return redirect()->action([AdminController::class, 'indexJefeDepto']);
+                    break;
+                case 4:
+                    return redirect()->action([AdminController::class, 'indexProfesor']);
+                    break;
+                default:
+            }
+
+    }
+
+    public function updateInfo(Request $request){
+        $request->validate([
+            'nombre'            =>     'required|min:2!max:100',
+            'apellidop'         =>     'required|alpha|min:2!max:100',
+            'apellidom'         =>     'required|alpha|min:2!max:100',
+            'telefono'          =>     'required|numeric',
+        ]);
+
+        DB::table('users')
+        ->where('id',Auth::user()->id)
+        ->update([
+            'nombre'        =>      $request->nombre,
+            'apellidop'     =>      $request->apellidop,
+            'apellidom'     =>      $request->apellidom,
+            'telefono'      =>      $request->telefono
+        ]);
+
+        switch(Auth::user()->rol_id){
+            case 1:
+                return redirect()->action([AdminController::class, 'indexAdmin']);
+                break;
+            case 2:
+                return redirect()->action([AdminController::class, 'indexSubdirector']);
+                break;
+            case 3:
+                return redirect()->action([AdminController::class, 'indexJefeDepto']);
+                break;
+            case 4:
+                return redirect()->action([AdminController::class, 'indexProfesor']);
+                break;
+            default:
+        }
     }
 
     /**
@@ -283,5 +374,18 @@ class UserController extends Controller
             
             $deptos = Departamento::all();
             return view('admin.admin_users',['users'=>$users, 'deptos'=>$deptos]);
+    }
+
+    public function editarPerfil(User $user){
+        $user = $user::find(Auth::user()->id);
+
+        $users = DB::table('users')
+            ->join('departamentos', 'users.departamento_id', '=', 'departamentos.id')
+            ->join('rols', 'users.rol_id', '=', 'rols.id')
+            ->where('users.id',$user->id)
+            ->select('users.*', 'departamentos.nombre as deptoNombre', 'rols.nombre as rolNombre')
+            ->get();
+        
+        
     }
 }
