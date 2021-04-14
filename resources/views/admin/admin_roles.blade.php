@@ -30,9 +30,9 @@
                     </tbody>
                 </table>
             </div>
-            <div class="right">
+            {{-- <div class="right">
                 <a href="{{route('rol.crear')}}" class="btn btn-success">Nuevo Rol <i class="fas fa-plus"></i></a>
-            </div>
+            </div> --}}
         </div>
     </div>
 @endsection

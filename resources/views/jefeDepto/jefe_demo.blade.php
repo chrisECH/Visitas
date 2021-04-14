@@ -57,7 +57,7 @@
                                 <a class="dropdown-item" href="{{route('jDepto.index')}}">Inicio</a>
                                 <a class="dropdown-item" href="{{route('jDepto.perfil',Auth::user()->id)}}">Perfil</a>
                                 <a class="dropdown-item" href="{{route('jDepto.solicitudes')}}">Ver solicitudes</a>
-                                <a class="dropdown-item" href="#">Configuracion</a>
+                                <a class="dropdown-item" href="{{route('jDepto.editarPerfil',Auth::user()->id)}}">Editar perfil</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{route('usuario.logout')}}">Cerrar sesión</a>
                             </div>

@@ -62,7 +62,7 @@
                                 <a class="dropdown-item" href="{{route('profe.status_solicitud')}}">Consultar estado de solicitudes</a>
                                 <a class="dropdown-item" href="{{route('profe.solicitudes')}}">Ver solicitudes creadas</a>
                                 
-                                <a class="dropdown-item" href="#">Configuracion</a>
+                                <a class="dropdown-item" href="{{route('profe.editarPerfil',Auth::user()->id)}}">Editar perfil</a>
                                 <div class="dropdown-divider"></div>
                                 <form method="POST" action="{{route('user.logout')}}">
                                     @csrf

@@ -31,7 +31,7 @@
             <div class="menu">
                 <a href="{{route('admin.index')}}" class="d-block text-light p-3"><i class="icon ion-md-home mr-2 lead"></i>Inicio</a>
                 <a href="{{route('admin.perfil',Auth::user()->id)}}" class="d-block text-light p-3"><i class="icon ion-md-contact mr-2 lead"></i>Pefil</a>
-                <a href="" class="d-block text-light p-3"><i class="icon ion-md-stats mr-2 lead"></i>Estadisticas</a>
+                {{-- <a href="" class="d-block text-light p-3"><i class="icon ion-md-stats mr-2 lead"></i>Estadisticas</a> --}}
                 <a href="{{route('admin.solicitudes')}}" class="d-block text-light p-3"><i class="icon ion-md-document mr-2 lead"></i>Administrar Solicitudes</a>
                 <a href="{{route('usuarios.index')}}" class="d-block text-light p-3"><i class="icon ion-md-person-add mr-2 lead"></i>Administrar Usuarios</a>
                 <a href="{{route('rol.index')}}" class="d-block text-light p-3"><i class="icon ion-md-contacts mr-2 lead"></i>Administrar Roles</a>
@@ -65,13 +65,13 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{route('admin.index')}}">Inicio</a>
                                 <a class="dropdown-item" href="{{route('admin.perfil',Auth::user()->id)}}">Perfil</a>
-                                <a class="dropdown-item" href="#">Etadisticas</a>
+                                {{-- <a class="dropdown-item" href="#">Etadisticas</a> --}}
                                 <a class="dropdown-item" href="{{url('/admin/solicitudes')}}">Administrar solicitudes</a>
                                 <a class="dropdown-item" href="{{route('usuarios.index')}}">Administrar usuario</a>
                                 <a class="dropdown-item" href="{{route('rol.index')}}">Administrar roles</a>
                                 <a class="dropdown-item" href="{{route('depto.index')}}">Administrar departamentos</a>
                                 <a class="dropdown-item" href="{{route('carrera.index')}}">Administrar carreras</a>
-                                <a class="dropdown-item" href="#">Configuracion</a>
+                                <a class="dropdown-item" href="{{route('admin.editarPerfil',Auth::user()->id)}}">Editar perfil</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{route('usuario.logout')}}">Cerrar sesión</a>
                             </div>
