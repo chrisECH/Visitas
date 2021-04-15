@@ -57,10 +57,10 @@
                                     </a>
                                 @endif
                                 @if($solicitud->autorizacion == 1)
-                                <a href="{{route('profe.descargar_formato',$solicitud->id)}}" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Descargar Solicitud">
+                                <a href="{{route('profe.descargar_formato',$solicitud->id)}}" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Descargar formato de la solicitud">
                                     <i class="fas fa-file-download"></i>
                                 </a>
-                                <a href="{{route('profe.descargar_solicitud',$solicitud->id)}}" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Descargar Solicitud">
+                                <a href="{{route('profe.descargar_solicitud',$solicitud->id)}}" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Descargar solicitud">
                                     <i class="fas fa-file-download"></i>
                                 </a>
                                 @endif
